@@ -366,6 +366,7 @@ def validate_openai(
     records: dict[str, TestRecord],
     repo_dir: Path,
     settings: Settings,
+    run_dir: Path,
 ) -> ValidationFile:
     from openai import OpenAI
 
@@ -384,7 +385,7 @@ def validate_openai(
         )
         parsed: LLMResponse | None = None
         last_err = ""
-        raw_dir = Path(settings.artifacts_dir) / "llm_raw"
+        raw_dir = Path(run_dir) / "llm_raw"
         raw_dir.mkdir(parents=True, exist_ok=True)
         for attempt in range(1, MAX_RETRIES + 1):
             try:

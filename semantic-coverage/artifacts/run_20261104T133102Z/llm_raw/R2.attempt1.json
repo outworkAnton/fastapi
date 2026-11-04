@@ -1,0 +1,127 @@
+{
+  "requirement_id": "R2",
+  "acs": [
+    {
+      "ac_id": "R2.AC1",
+      "status": "covered",
+      "confidence": 0.9,
+      "reasoning": "test_sub_counter asserts that on the first request counter == 1 and subcounter == 1 (single call per request via default cache), and on the second request both increment to 2, confirming per-request caching behavior. test_normal_counter provides supplementary evidence for the counter alone.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_cache.py::test_sub_counter",
+          "file": "tests/test_dependency_cache.py",
+          "line_start": 64,
+          "line_end": 71,
+          "quote": "assert response.json() == {\"counter\": 1, \"subcounter\": 1}"
+        },
+        {
+          "test_id": "tests/test_dependency_cache.py::test_sub_counter",
+          "file": "tests/test_dependency_cache.py",
+          "line_start": 64,
+          "line_end": 71,
+          "quote": "assert response.json() == {\"counter\": 2, \"subcounter\": 2}"
+        },
+        {
+          "test_id": "tests/test_dependency_cache.py::test_normal_counter",
+          "file": "tests/test_dependency_cache.py",
+          "line_start": 54,
+          "line_end": 61,
+          "quote": "assert response.json() == {\"counter\": 1}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R2.AC2",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "test_sub_counter_no_cache asserts exactly the expected values for a non-cached sub-dependency: counter == 2 while subcounter == 1 on the first response, and a diverging pattern (counter 4, subcounter 3) on the second, showing the non-cached dependency is re-invoked.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+          "file": "tests/test_dependency_cache.py",
+          "line_start": 74,
+          "line_end": 81,
+          "quote": "assert response.json() == {\"counter\": 2, \"subcounter\": 1}"
+        },
+        {
+          "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+          "file": "tests/test_dependency_cache.py",
+          "line_start": 74,
+          "line_end": 81,
+          "quote": "assert response.json() == {\"counter\": 4, \"subcounter\": 3}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R2.AC3",
+      "status": "covered",
+      "confidence": 0.85,
+      "reasoning": "Multiple tests in test_dependency_overrides.py assert 200 responses whose bodies are the overridden dependency's outputs (e.g., 'main-depends', 'router-depends', 'decorator-depends'), demonstrating that dependency_overrides replaces the implementation. The assertion bodies come from the override functions (values not produced by the original dependencies), and status_code == 200 is asserted. The setup lines calling app.dependency_overrides are not shown, so confidence is slightly below full.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_main_depends_k_bar",
+          "file": "tests/test_dependency_overrides.py",
+          "line_start": 252,
+          "line_end": 257,
+          "quote": "assert response.status_code == 200"
+        },
+        {
+          "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_main_depends_k_bar",
+          "file": "tests/test_dependency_overrides.py",
+          "line_start": 252,
+          "line_end": 257,
+          "quote": "assert response.json() == {\"in\": \"main-depends\", \"params\": {\"k\": \"bar\"}}"
+        },
+        {
+          "test_id": "tests/test_dependency_overrides.py::test_decorator_depends_q_foo",
+          "file": "tests/test_dependency_overrides.py",
+          "line_start": 99,
+          "line_end": 102,
+          "quote": "assert response.json() == {\"in\": \"decorator-depends\"}"
+        },
+        {
+          "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_k_bar",
+          "file": "tests/test_dependency_overrides.py",
+          "line_start": 340,
+          "line_end": 345,
+          "quote": "assert response.json() == {\"in\": \"router-depends\", \"params\": {\"k\": \"bar\"}}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R2.AC4",
+      "status": "partial",
+      "confidence": 0.45,
+      "reasoning": "Tests in test_dependency_yield_scope.py demonstrate that code after yield in a dependency executes ('Exception after yield' surfaces in the response detail), which proves the after-yield block runs. However, no test asserts teardown side effects completing AFTER a successful response (e.g., a flag/state recorded post-yield verified after a 200), and no contextmanager-based teardown verification is present. test_app_level_dep_scope_request only asserts a 200 body with no teardown check; test_traceback_for_dependency_with_yield checks traceback frames, not teardown.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+          "file": "tests/test_dependency_yield_scope.py",
+          "line_start": 222,
+          "line_end": 232,
+          "quote": "assert response.json() == {\"detail\": \"Exception after yield\"}"
+        },
+        {
+          "test_id": "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_function",
+          "file": "tests/test_dependency_yield_scope.py",
+          "line_start": 209,
+          "line_end": 212,
+          "quote": "assert response.json() == {\"detail\": \"Exception after yield\"}"
+        },
+        {
+          "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+          "file": "tests/test_dependency_yield_scope.py",
+          "line_start": 235,
+          "line_end": 245,
+          "quote": "assert response.json() == {\"status\": \"ok\"}"
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    "R2.AC4: no test verifies teardown completion after a successful (200) response, e.g., asserting a post-yield flag/list/lock state after the response is received; only error-path execution of after-yield code ('Exception after yield') is exercised.",
+    "R2.AC4: no contextmanager-based teardown verification is present in the candidate tests.",
+    "R2.AC3: only assertion bodies are available; the actual app.dependency_overrides[...] assignment lines are not shown, so coverage of the override mechanism is inferred from test file/name and overridden result values."
+  ],
+  "notes": "Analysis based solely on the provided assertion snippets. AC1/AC2 are directly matched by exact counter/subcounter JSON assertions. AC3 is matched by multiple override tests returning overridden payloads with 200. AC4 is only partially demonstrated via exception-after-yield behavior rather than an explicit teardown-state assertion."
+}

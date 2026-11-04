@@ -162,7 +162,7 @@ def cmd_validate(args: argparse.Namespace, s: Settings) -> Path:
         val = validate_offline(reqs.requirements, pools, by_id, s.repo_dir)
         calls = 0
     else:
-        val = validate_openai(reqs.requirements, pools, by_id, s.repo_dir, s)
+        val = validate_openai(reqs.requirements, pools, by_id, s.repo_dir, s, run)
         calls = len(reqs.requirements)
 
     (run / "validated.json").write_text(

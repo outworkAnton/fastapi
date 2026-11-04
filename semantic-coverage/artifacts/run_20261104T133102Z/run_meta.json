@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-11-04T13:31:02.964299+00:00",
+  "repo_url": "https://github.com/fastapi/fastapi.git",
+  "repo_dir": ".repos\\fastapi",
+  "commit": "61ae7934cfd742169f5c3bf7595f8cc1a5849895",
+  "validator": "openai",
+  "model": "glm-5.3",
+  "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "embedding_backend": "st:paraphrase-multilingual-MiniLM-L12-v2",
+  "seed": 42,
+  "files": 50,
+  "tests": 649,
+  "tests_without_asserts": 0,
+  "tests_with_raises_only": 23,
+  "python": "3.12.10",
+  "packages": {
+    "openai": "3.43.0",
+    "numpy": "2.5.4",
+    "rank-bm25": "0.2.2",
+    "pydantic": "2.14.2",
+    "PyYAML": "6.0.3",
+    "sentence-transformers": "6.2.0"
+  },
+  "run_id": "run_20261104T133102Z",
+  "rrf_k": 60,
+  "depth": 30,
+  "per_ac": 10,
+  "pool_cap": 25,
+  "embedding_cache_hit": true,
+  "llm_calls": 5
+}

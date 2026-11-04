@@ -1,0 +1,69 @@
+{
+  "requirement_id": "R4",
+  "acs": [
+    {
+      "ac_id": "R4.AC1",
+      "status": "covered",
+      "confidence": 0.98,
+      "reasoning": "test_override_http_exception asserts exactly the AC check: response status_code == 200 and JSON body {\"exception\": \"http-exception\"} returned by the custom HTTPException handler.",
+      "evidence": [
+        {
+          "test_id": "tests/test_exception_handlers.py::test_override_http_exception",
+          "file": "tests/test_exception_handlers.py",
+          "line_start": 58,
+          "line_end": 61,
+          "quote": "assert response.status_code == 200\n    assert response.json() == {\"exception\": \"http-exception\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R4.AC2",
+      "status": "covered",
+      "confidence": 0.98,
+      "reasoning": "test_override_request_validation_exception asserts exactly the AC check: status_code == 200 and body exception == request-validation.",
+      "evidence": [
+        {
+          "test_id": "tests/test_exception_handlers.py::test_override_request_validation_exception",
+          "file": "tests/test_exception_handlers.py",
+          "line_start": 64,
+          "line_end": 67,
+          "quote": "assert response.status_code == 200\n    assert response.json() == {\"exception\": \"request-validation\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R4.AC3",
+      "status": "covered",
+      "confidence": 0.9,
+      "reasoning": "test_override_server_error_exception_response asserts status_code == 500 and body exception == server-error, exactly matching the AC check. The client must be constructed with raise_server_exceptions=False for these assertions to be reachable (the complementary test_override_server_error_exception_raises shows the exception propagates as RuntimeError otherwise), although that client construction is not visible in the provided assertion snippet, so confidence is slightly reduced.",
+      "evidence": [
+        {
+          "test_id": "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+          "file": "tests/test_exception_handlers.py",
+          "line_start": 75,
+          "line_end": 79,
+          "quote": "assert response.status_code == 500\n    assert response.json() == {\"exception\": \"server-error\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R4.AC4",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "test_traceback_for_dependency_with_yield asserts that the last traceback frame's lineno equals raise_value_error.__code__.co_firstlineno (the original raise line in the dependency) and that the frame path is the test file containing the dependency, directly satisfying the AC check.",
+      "evidence": [
+        {
+          "test_id": "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+          "file": "tests/test_exception_handlers.py",
+          "line_start": 82,
+          "line_end": 88,
+          "quote": "assert str(last_frame.path) == __file__\n    assert last_frame.lineno == raise_value_error.__code__.co_firstlineno"
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    "AC3: the provided snippet for test_override_server_error_exception_response does not show the TestClient(..., raise_server_exceptions=False) setup; only the outcome assertions (500 + server-error body) are visible, so the 'raise_server_exceptions is False' condition is inferred rather than directly evidenced."
+  ],
+  "notes": "All four ACs are directly satisfied by tests in tests/test_exception_handlers.py, whose assertion bodies match the AC checks verbatim. The remaining candidate tests (telemetry, dependency contextmanager, middleware, starlette exception, openapi schema) exercise related error paths but do not match the specific AC checks (e.g., test_dependency_contextmanager 500 tests assert state/errors, not the {\"exception\": \"server-error\"} body; test_custom_error_handler_sees_span asserts {\"error\": \"handled\"}, not the AC body). test_override_server_error_exception_raises covers the complementary default behavior (exception propagates) and is not evidence for AC3."
+}

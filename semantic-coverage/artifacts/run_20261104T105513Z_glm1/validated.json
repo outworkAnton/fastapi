@@ -1,0 +1,636 @@
+{
+  "provider": "openai",
+  "model": "glm-5.3",
+  "results": [
+    {
+      "requirement_id": "R1",
+      "acs": [
+        {
+          "ac_id": "R1.AC1",
+          "status": "covered",
+          "confidence": 0.85,
+          "evidence": [
+            {
+              "test_id": "tests/test_multi_body_errors.py::test_put_correct_body",
+              "file": "tests/test_multi_body_errors.py",
+              "line_start": 25,
+              "line_end": 37,
+              "quote": "assert response.status_code == 200, response.text"
+            },
+            {
+              "test_id": "tests/test_multi_body_errors.py::test_put_correct_body",
+              "file": "tests/test_multi_body_errors.py",
+              "line_start": 25,
+              "line_end": 37,
+              "quote": "\"item\": ["
+            },
+            {
+              "test_id": "tests/test_body_alias_choices.py::test_model_body_alias_choice_preserves_nested_errors",
+              "file": "tests/test_body_alias_choices.py",
+              "line_start": 196,
+              "line_end": 225,
+              "quote": "assert response.status_code == 200"
+            }
+          ],
+          "reasoning": "test_put_correct_body sends a correct body and asserts status_code == 200 plus response.json() equal to a snapshot that contains the submitted item (\"item\": [{\"name\": \"Foo\", \"age\": \"5\"}]), satisfying the check 'status_code == 200 and response.json() contains the submitted item'. test_model_body_alias_choice_preserves_nested_errors provides supplementary 200 + response.json() evidence (echoing {\"count\": 1}), though its echo payload is minimal. Confidence slightly reduced because the echo is verified via exact snapshot equality rather than explicit containment of an independently constructed payload, and only one primary test exists."
+        },
+        {
+          "ac_id": "R1.AC2",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_union_form_normalization.py::test_empty_scalar_is_missing",
+              "file": "tests/test_union_form_normalization.py",
+              "line_start": 148,
+              "line_end": 153,
+              "quote": "assert error[\"loc\"] == [\"body\", branch, \"value\"]"
+            },
+            {
+              "test_id": "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+              "file": "tests/test_body_alias_choices.py",
+              "line_start": 134,
+              "line_end": 142,
+              "quote": "(\"missing\", [\"body\", \"items\"]),"
+            },
+            {
+              "test_id": "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_absent_body_for_required_argument",
+              "file": "tests/test_request_params/test_body/test_nullable_and_defaults.py",
+              "line_start": 133,
+              "line_end": 139,
+              "quote": "(\"missing\", location),"
+            }
+          ],
+          "reasoning": "Multiple tests assert 422 with detail type 'missing' and a loc rooted at the body. test_empty_scalar_is_missing asserts error['type'] == 'missing' and error['loc'] == ['body', branch, 'value']; test_embedded_body_requires_an_object asserts ('missing', ['body', 'items']) pairs; test_absent_body_for_required_argument asserts ('missing', location). These directly satisfy 'status_code == 422 and detail contains missing and loc' for the request body. test_main_depends also shows 422/missing/loc but for a query parameter, so it is not counted as body evidence."
+        },
+        {
+          "ac_id": "R1.AC3",
+          "status": "covered",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "test_id": "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+              "file": "tests/test_multi_body_errors.py",
+              "line_start": 40,
+              "line_end": 53,
+              "quote": "\"type\": \"greater_than\","
+            },
+            {
+              "test_id": "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+              "file": "tests/test_multi_body_errors.py",
+              "line_start": 40,
+              "line_end": 53,
+              "quote": "\"loc\": [\"body\", 0, \"age\"],"
+            },
+            {
+              "test_id": "tests/test_path.py::test_path_param_gt0_0",
+              "file": "tests/test_path.py",
+              "line_start": 334,
+              "line_end": 347,
+              "quote": "\"loc\": [\"path\", \"item_id\"],"
+            }
+          ],
+          "reasoning": "test_jsonable_encoder_requiring_error asserts status_code == 422 and a detail entry with type 'greater_than' and loc ['body', 0, 'age'], i.e., a value-constraint violation inside the request body — a direct match for 'status_code == 422 and detail type is greater_than' with loc, in a body location. The test_path_param_* tests also assert 422 with type 'greater_than' and loc, but their loc is ['path', 'item_id'], so they are supplementary rather than body-scoped evidence for this requirement."
+        },
+        {
+          "ac_id": "R1.AC4",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+              "file": "tests/test_request_params/test_body/test_required_str.py",
+              "line_start": 35,
+              "line_end": 46,
+              "quote": "\"required\": [\"p\"],"
+            },
+            {
+              "test_id": "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+              "file": "tests/test_request_params/test_body/test_list.py",
+              "line_start": 35,
+              "line_end": 50,
+              "quote": "\"required\": [\"p\"],"
+            },
+            {
+              "test_id": "tests/test_get_request_body.py::test_openapi_schema",
+              "file": "tests/test_get_request_body.py",
+              "line_start": 29,
+              "line_end": 114,
+              "quote": "\"required\": [\"name\", \"price\"],"
+            }
+          ],
+          "reasoning": "Several tests assert app.openapi()['components']['schemas'][body_model_name] contains a 'required' list naming the body field ('required': ['p'] or alias variants), directly satisfying 'openapi components schemas required list contains field'. test_get_request_body.py::test_openapi_schema additionally asserts a body model schema with 'required': ['name', 'price']. These are explicit OpenAPI component-schema checks for required body fields."
+        }
+      ],
+      "gaps": [
+        "R1.AC1: only one primary test (test_put_correct_body) demonstrates a 200 response echoing the submitted body item; the echo is asserted via exact snapshot equality rather than explicit containment of a separately constructed payload, so the AC is met but by a single, tightly coupled test.",
+        "R1.AC3: only one body-located greater_than test exists; the remaining greater_than tests (test_path_param_*) exercise path parameters (loc ['path', 'item_id']), not request-body fields, so they do not strengthen body-scoped coverage.",
+        "R1.AC2: test_main_depends asserts 422/missing/loc but on a query parameter ('loc': ['query', 'q']) and therefore does not contribute body-validation evidence."
+      ],
+      "pool": [
+        "tests/test_union_form_normalization.py::test_empty_scalar_is_missing",
+        "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+        "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+        "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+        "tests/test_path.py::test_path_param_gt0_0",
+        "tests/test_request_params/test_body/test_list.py::test_required_list_validation_alias_schema",
+        "tests/test_path.py::test_path_param_lt_gt_0",
+        "tests/test_path.py::test_path_param_lt_gt_int_0",
+        "tests/test_path.py::test_path_param_gt_int_2",
+        "tests/test_request_params/test_body/test_required_str.py::test_required_validation_alias_schema",
+        "tests/test_request_params/test_body/test_list.py::test_required_list_str_alias_schema",
+        "tests/test_tutorial/test_bigger_applications/test_main.py::test_openapi_schema",
+        "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+        "tests/test_path.py::test_path_param_gt_2",
+        "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_absent_body_for_required_argument",
+        "tests/test_union_form_normalization.py::test_omitted_list_is_missing",
+        "tests/test_dependency_overrides.py::test_main_depends",
+        "tests/test_multi_body_errors.py::test_put_correct_body",
+        "tests/test_union_form_normalization.py::test_empty_multipart_scalar_is_missing",
+        "tests/test_get_request_body.py::test_openapi_schema",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_request_params/test_body/test_required_str.py::test_required_str_alias_schema",
+        "tests/test_body_alias_choices.py::test_model_body_alias_choice_preserves_nested_errors",
+        "tests/test_request_params/test_body/test_list.py::test_required_list_alias_and_validation_alias_schema",
+        "tests/test_request_params/test_body/test_required_str.py::test_required_alias_and_validation_alias_schema"
+      ],
+      "provider": "openai",
+      "model": "glm-5.3",
+      "verified": true
+    },
+    {
+      "requirement_id": "R2",
+      "acs": [
+        {
+          "ac_id": "R2.AC1",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_cache.py::test_sub_counter",
+              "file": "tests/test_dependency_cache.py",
+              "line_start": 64,
+              "line_end": 71,
+              "quote": "assert response.json() == {\"counter\": 1, \"subcounter\": 1}"
+            }
+          ],
+          "reasoning": "test_sub_counter issues a request to the cached sub-dependency endpoint and asserts the first response returns counter=1 and subcounter=1, which is exactly the AC check that a default-cached dependency is called once per request. The keyword 'subcounter' and 'response.json()' are present in the assertions."
+        },
+        {
+          "ac_id": "R2.AC2",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+              "file": "tests/test_dependency_cache.py",
+              "line_start": 74,
+              "line_end": 81,
+              "quote": "assert response.json() == {\"counter\": 2, \"subcounter\": 1}"
+            }
+          ],
+          "reasoning": "test_sub_counter_no_cache matches the AC exactly: the first request asserts counter==2 and subcounter==1, proving the dependency with use_cache=False is re-invoked within a single request while the cached sub-counter increments only once. The test name contains the keyword 'sub_counter_no_cache' and the assertions contain 'counter' and 'subcounter'."
+        },
+        {
+          "ac_id": "R2.AC3",
+          "status": "covered",
+          "confidence": 0.92,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_main_depends_k_bar",
+              "file": "tests/test_dependency_overrides.py",
+              "line_start": 252,
+              "line_end": 257,
+              "quote": "assert response.json() == {\"in\": \"main-depends\", \"params\": {\"k\": \"bar\"}}"
+            },
+            {
+              "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_k_bar",
+              "file": "tests/test_dependency_overrides.py",
+              "line_start": 340,
+              "line_end": 345,
+              "quote": "assert response.status_code == 200"
+            },
+            {
+              "test_id": "tests/test_dependency_overrides.py::test_decorator_depends_q_foo",
+              "file": "tests/test_dependency_overrides.py",
+              "line_start": 99,
+              "line_end": 102,
+              "quote": "assert response.json() == {\"in\": \"decorator-depends\"}"
+            }
+          ],
+          "reasoning": "Multiple tests in test_dependency_overrides.py assert that an overridden dependency's result is returned with a 200 status, e.g. test_override_with_sub_main_depends_k_bar returns {\"in\": \"main-depends\", \"params\": {\"k\": \"bar\"}} with status_code == 200, and test_override_with_sub_router_depends_k_bar / test_override_with_sub_decorator_depends_k_bar / test_override_with_sub_router_decorator_depends_k_bar confirm the same across Depends locations. These satisfy the AC check of overridden result with 200."
+        },
+        {
+          "ac_id": "R2.AC4",
+          "status": "partial",
+          "confidence": 0.55,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+              "file": "tests/test_dependency_yield_scope.py",
+              "line_start": 222,
+              "line_end": 232,
+              "quote": "assert response.json() == {\"detail\": \"Exception after yield\"}"
+            },
+            {
+              "test_id": "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_function",
+              "file": "tests/test_dependency_yield_scope.py",
+              "line_start": 209,
+              "line_end": 212,
+              "quote": "assert response.json() == {\"detail\": \"Exception after yield\"}"
+            },
+            {
+              "test_id": "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 82,
+              "line_end": 88,
+              "quote": "with pytest.raises(ValueError) as exc_info:\n        client.get(\"/dependency-with-yield\")"
+            }
+          ],
+          "reasoning": "There is indirect evidence that code after yield executes: test_app_level_dep_scope_function and test_router_level_dep_scope_function assert a 503 response with detail 'Exception after yield', proving the after-yield (teardown) code path ran, and test_traceback_for_dependency_with_yield raises ValueError from a yield dependency teardown path. However, no test asserts that teardown code runs AFTER a successful (200) response is delivered (e.g., a teardown flag/log checked post-response), and the keyword 'contextmanager' does not appear in any candidate test. The successful-response yield-scope test (test_app_level_dep_scope_request) only asserts {\"status\": \"ok\"} without any teardown verification."
+        }
+      ],
+      "gaps": [
+        "R2.AC4: no test verifies teardown code executes after a successful 200 response (e.g., asserting a teardown side effect/state after the response completes); existing evidence only shows after-yield code running via exceptions that produce 503 responses.",
+        "R2.AC4: no candidate test uses the 'contextmanager' keyword or directly asserts a teardown action (log entry, flag, cleanup list) for a normal completion path."
+      ],
+      "pool": [
+        "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+        "tests/test_dependency_cache.py::test_sub_counter",
+        "tests/test_dependency_cache.py::test_security_cache",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub__main_depends_q_foo",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_q_foo",
+        "tests/test_dependency_cache.py::test_normal_counter",
+        "tests/test_dependency_models.py::test_derived_values_are_not_stored_on_dependant",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+        "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+        "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_function",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_main_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_main_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+        "tests/test_dependency_models.py::test_derived_values_follow_dependency_state",
+        "tests/test_dependency_models.py::test_callable_classification_cache_supports_large_apps",
+        "tests/test_dependency_models.py::test_explicit_and_generator_scopes",
+        "tests/test_body_alias_choices.py::test_explicit_null_does_not_use_another_alias_or_default",
+        "tests/test_dependency_overrides.py::test_decorator_depends_q_foo",
+        "tests/test_telemetry/test_http.py::test_asgi_lifecycle"
+      ],
+      "provider": "openai",
+      "model": "glm-5.3",
+      "verified": true
+    },
+    {
+      "requirement_id": "R3",
+      "acs": [
+        {
+          "ac_id": "R3.AC1",
+          "status": "covered",
+          "confidence": 0.97,
+          "evidence": [
+            {
+              "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic",
+              "file": "tests/test_security_http_basic_optional.py",
+              "line_start": 23,
+              "line_end": 26,
+              "quote": "assert response.status_code == 200, response.text\n    assert response.json() == {\"username\": \"john\", \"password\": \"secret\"}"
+            }
+          ],
+          "reasoning": "Multiple tests send valid Basic credentials and assert status 200 plus the username in the response JSON ('john'), satisfying both parts of the check. Equivalent coverage also exists in test_security_http_basic_realm.py::test_security_http_basic (21-24) and test_security_http_basic_realm_description.py::test_security_http_basic (21-24)."
+        },
+        {
+          "ac_id": "R3.AC2",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+              "file": "tests/test_security_http_basic_optional.py",
+              "line_start": 29,
+              "line_end": 32,
+              "quote": "assert response.status_code == 200, response.text\n    assert response.json() == {\"msg\": \"Create an account first\"}"
+            }
+          ],
+          "reasoning": "The optional Basic test with no credentials asserts status 200 and the exact fallback message 'Create an account first', matching the AC check. (The similar test_security_http_base_optional.py::test_security_http_base_no_credentials also matches but uses the 'Other' scheme, not Basic.)"
+        },
+        {
+          "ac_id": "R3.AC3",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+              "file": "tests/test_security_http_basic_optional.py",
+              "line_start": 35,
+              "line_end": 41,
+              "quote": "assert response.status_code == 401, response.text\n    assert response.headers[\"WWW-Authenticate\"] == \"Basic\"\n    assert response.json() == {\"detail\": \"Not authenticated\"}"
+            },
+            {
+              "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+              "file": "tests/test_security_http_basic_optional.py",
+              "line_start": 44,
+              "line_end": 50,
+              "quote": "assert response.status_code == 401, response.text\n    assert response.headers[\"WWW-Authenticate\"] == \"Basic\"\n    assert response.json() == {\"detail\": \"Not authenticated\"}"
+            }
+          ],
+          "reasoning": "Both branches of the AC are covered in the optional Basic suite: invalid Basic credentials and non-Basic credentials each assert 401, WWW-Authenticate header exactly equal to 'Basic', and the 'Not authenticated' detail. The realm variants assert 'Basic realm=\"simple\"' (not exact 'Basic'), so they are supplementary rather than primary evidence for the exact-equality check."
+        },
+        {
+          "ac_id": "R3.AC4",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_security_http_basic_optional.py::test_openapi_schema",
+              "file": "tests/test_security_http_basic_optional.py",
+              "line_start": 53,
+              "line_end": 79,
+              "quote": "\"securitySchemes\": {\"HTTPBasic\": {\"type\": \"http\", \"scheme\": \"basic\"}}"
+            }
+          ],
+          "reasoning": "The OpenAPI schema tests assert the full schema including components.securitySchemes.HTTPBasic with scheme 'basic'. The realm and realm_description variants (lines 52-78 and 52-84) assert the same scheme, with the latter adding a description."
+        }
+      ],
+      "gaps": [],
+      "pool": [
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_no_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_webhook_route_contexts",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+        "tests/test_security_http_base_optional.py::test_security_http_base_with_ws",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_with_ws_no_credentials",
+        "tests/test_security_http_base.py::test_security_http_base_no_credentials",
+        "tests/test_security_http_base.py::test_security_http_base",
+        "tests/test_security_http_base_optional.py::test_security_http_base",
+        "tests/test_dependency_paramless.py::test_parameterless_without_scopes",
+        "tests/test_security_http_base.py::test_security_http_base_with_whitespaces",
+        "tests/test_security_http_basic_optional.py::test_openapi_schema",
+        "tests/test_security_http_basic_realm.py::test_openapi_schema",
+        "tests/test_security_http_basic_realm_description.py::test_openapi_schema"
+      ],
+      "provider": "openai",
+      "model": "glm-5.3",
+      "verified": true
+    },
+    {
+      "requirement_id": "R4",
+      "acs": [
+        {
+          "ac_id": "R4.AC1",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_override_http_exception",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 58,
+              "line_end": 61,
+              "quote": "assert response.status_code == 200\n    assert response.json() == {\"exception\": \"http-exception\"}"
+            }
+          ],
+          "reasoning": "test_override_http_exception asserts exactly the AC check: status_code == 200 and response body exception == 'http-exception'."
+        },
+        {
+          "ac_id": "R4.AC2",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_override_request_validation_exception",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 64,
+              "line_end": 67,
+              "quote": "assert response.status_code == 200\n    assert response.json() == {\"exception\": \"request-validation\"}"
+            }
+          ],
+          "reasoning": "test_override_request_validation_exception asserts exactly the AC check: status_code == 200 and response body exception == 'request-validation'."
+        },
+        {
+          "ac_id": "R4.AC3",
+          "status": "covered",
+          "confidence": 0.85,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 75,
+              "line_end": 79,
+              "quote": "assert response.status_code == 500\n    assert response.json() == {\"exception\": \"server-error\"}"
+            }
+          ],
+          "reasoning": "test_override_server_error_exception_response asserts status_code == 500 and body exception == 'server-error', matching the AC check. The client setup with raise_server_exceptions=False is not visible in the provided assertion lines, so slight uncertainty remains, but the assertions themselves match the check verbatim. Related 500-status tests (test_sync_raise_server_error, test_async_raise_server_error, test_sync_async_raise_server_error, test_sync_sync_raise_server_error) assert only status 500 and lack the 'server-error' body check, so they are secondary corroboration only."
+        },
+        {
+          "ac_id": "R4.AC4",
+          "status": "covered",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 82,
+              "line_end": 88,
+              "quote": "assert str(last_frame.path) == __file__\n    assert last_frame.lineno == raise_value_error.__code__.co_firstlineno"
+            }
+          ],
+          "reasoning": "test_traceback_for_dependency_with_yield triggers a ValueError from a dependency and asserts that the last traceback frame's path is the test file and its lineno equals the raise statement's first line number, which is exactly the AC check."
+        }
+      ],
+      "gaps": [],
+      "pool": [
+        "tests/test_exception_handlers.py::test_override_request_validation_exception",
+        "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+        "tests/test_exception_handlers.py::test_override_http_exception",
+        "tests/test_custom_middleware_exception.py::test_custom_middleware_exception_not_raised",
+        "tests/test_telemetry/test_http.py::test_custom_error_handler_sees_span",
+        "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_async_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_sync_async_raise_server_error",
+        "tests/test_exception_handlers.py::test_override_server_error_exception_raises",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_server_error",
+        "tests/test_starlette_exception.py::test_no_body_status_code_exception_handlers",
+        "tests/test_starlette_exception.py::test_no_body_status_code_with_detail_exception_handlers",
+        "tests/test_custom_middleware_exception.py::test_custom_middleware_exception",
+        "tests/test_validation_error_context.py::test_websocket_validation_error_includes_endpoint_context",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_starlette_exception.py::test_openapi_schema",
+        "tests/test_telemetry/test_http.py::test_middleware_response_or_error",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_raises",
+        "tests/test_telemetry/test_http.py::test_http_statuses",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_raises",
+        "tests/test_router_include_context.py::test_included_partial_match_returns_405_when_no_later_full_match_exists",
+        "tests/test_dependency_contextmanager.py::test_sync_async_raise_raises",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_other"
+      ],
+      "provider": "openai",
+      "model": "glm-5.3",
+      "verified": true
+    },
+    {
+      "requirement_id": "R5",
+      "acs": [
+        {
+          "ac_id": "R5.AC1",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+              "file": "tests/test_response_model_data_filter.py",
+              "line_start": 59,
+              "line_end": 63,
+              "quote": "assert response.json() == {\"email\": \"johndoe@example.com\"}"
+            },
+            {
+              "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+              "file": "tests/test_response_model_data_filter_no_inheritance.py",
+              "line_start": 61,
+              "line_end": 65,
+              "quote": "assert response.json() == {\"email\": \"johndoe@example.com\"}"
+            }
+          ],
+          "reasoning": "Two tests assert exact equality of the full response JSON with only the 'email' field at the top level, which proves extra fields (e.g., password) are stripped by response_model serialization. Exact-equality assertions are the strongest form of 'no extra fields' check."
+        },
+        {
+          "ac_id": "R5.AC2",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+              "file": "tests/test_response_model_data_filter.py",
+              "line_start": 66,
+              "line_end": 71,
+              "quote": "assert response.json() == {\n    \"name\": \"Nibbler\",\n    \"owner\": {\"email\": \"johndoe@example.com\"},\n}"
+            },
+            {
+              "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+              "file": "tests/test_response_model_data_filter_no_inheritance.py",
+              "line_start": 68,
+              "line_end": 73,
+              "quote": "assert response.json() == {\n    \"name\": \"Nibbler\",\n    \"owner\": {\"email\": \"johndoe@example.com\"},\n}"
+            },
+            {
+              "test_id": "tests/test_response_model_data_filter.py::test_list_of_models",
+              "file": "tests/test_response_model_data_filter.py",
+              "line_start": 74,
+              "line_end": 79,
+              "quote": "assert response.json() == [\n    {\"name\": \"Nibbler\", \"owner\": {\"email\": \"johndoe@example.com\"}},\n    {\"name\": \"Zoidberg\", \"owner\": {\"email\": \"johndoe@example.com\"}},\n]"
+            }
+          ],
+          "reasoning": "Multiple tests assert exact response JSON where the nested 'owner' object contains only 'email', verifying second-level stripping by response_model. Both single-model and list-of-models variants exist in two files."
+        },
+        {
+          "ac_id": "R5.AC3",
+          "status": "covered",
+          "confidence": 0.85,
+          "evidence": [
+            {
+              "test_id": "tests/test_response_model_include_exclude.py::test_nested_include_simple",
+              "file": "tests/test_response_model_include_exclude.py",
+              "line_start": 116,
+              "line_end": 124,
+              "quote": "assert response.status_code == 200, response.text\nassert response.json() == {\n    \"baz\": \"simple_include model2 baz\",\n    \"ref\": {\"foo\": \"simple_include model foo\"},\n}"
+            },
+            {
+              "test_id": "tests/test_response_model_include_exclude.py::test_nested_exclude_simple",
+              "file": "tests/test_response_model_include_exclude.py",
+              "line_start": 138,
+              "line_end": 144,
+              "quote": "assert response.status_code == 200, response.text\nassert response.json() == {\n    \"baz\": \"simple_exclude model2 baz\",\n    \"ref\": {\"foo\": \"simple_exclude model foo\"},\n}"
+            },
+            {
+              "test_id": "tests/test_response_model_include_exclude.py::test_nested_exclude_simple_dict",
+              "file": "tests/test_response_model_include_exclude.py",
+              "line_start": 147,
+              "line_end": 153,
+              "quote": "assert response.status_code == 200, response.text\nassert response.json() == {\n    \"baz\": \"simple_exclude_dict model2 baz\",\n    \"ref\": {\"foo\": \"simple_exclude_dict model foo\"},\n}"
+            }
+          ],
+          "reasoning": "Tests in test_response_model_include_exclude.py assert exact filtered response JSON for both include and exclude variants (including nested cases), confirming only included fields are present and excluded fields are absent. Confidence slightly reduced because the provided snippets show only assertion lines; the actual response_model_include/response_model_exclude parameter usage is inferred from the file/test names and the exact filtered JSON shapes rather than directly visible in the cited lines."
+        },
+        {
+          "ac_id": "R5.AC4",
+          "status": "covered",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "test_id": "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+              "file": "tests/test_response_model_invalid.py",
+              "line_start": 10,
+              "line_end": 16,
+              "quote": "with pytest.raises(FastAPIError):\n    app = FastAPI()\n\n    @app.get(\"/\", response_model=NonPydanticModel)\n    def read_root():\n        pass"
+            },
+            {
+              "test_id": "tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field",
+              "file": "tests/test_response_model_as_return_annotation.py",
+              "line_start": 499,
+              "line_end": 508,
+              "quote": "with pytest.raises(FastAPIError) as e:\n\n    @app.get(\"/\")\n    def read_root() -> Response | None:\n        return Response(content=\"Foo\")"
+            },
+            {
+              "test_id": "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_response_model",
+              "file": "tests/test_pydantic_v1_error.py",
+              "line_start": 45,
+              "line_end": 55,
+              "quote": "with pytest.raises(PydanticV1NotSupportedError):\n\n    @app.get(\"/response-model\", response_model=ResponseModelV1)\n    def endpoint():  # pragma: no cover\n        return {\"name\": \"test\"}"
+            }
+          ],
+          "reasoning": "A dedicated test wraps route creation with an invalid (non-Pydantic) response_model in pytest.raises(FastAPIError). Additional tests raise FastAPIError for invalid annotated response models and PydanticV1NotSupportedError for unsupported models passed via response_model, reinforcing coverage."
+        }
+      ],
+      "gaps": [
+        "AC3: The cited assertion lines do not directly display the response_model_include/response_model_exclude decorator arguments; parameter usage is inferred from file/test naming and exact filtered JSON expectations, so coverage is slightly less certain than AC1/AC2/AC4.",
+        "AC4: No test verifies the runtime HTTP-500-on-invalid-response-model path (ResponseValidationError at request time is covered, but only via tests about return-annotation mismatch rather than an explicitly invalid response_model at request time)."
+      ],
+      "pool": [
+        "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+        "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+        "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+        "tests/test_response_model_data_filter.py::test_list_of_models",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_list_of_models",
+        "tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field",
+        "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_additional_responses_model",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_model",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_dict",
+        "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_response_model",
+        "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+        "tests/test_response_model_include_exclude.py::test_nested_exclude_simple",
+        "tests/test_response_model_include_exclude.py::test_nested_exclude_simple_dict",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_model1_annotation_model2_return_invalid_model",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_model1_annotation_model2_return_invalid_dict",
+        "tests/test_response_model_as_return_annotation.py::test_no_response_model_annotation_return_invalid_model",
+        "tests/test_response_model_as_return_annotation.py::test_no_response_model_annotation_return_invalid_dict",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic",
+        "tests/test_serialize_response_model.py::test_coerce_exclude_unset",
+        "tests/test_serialize_response_model.py::test_valid_exclude_unset",
+        "tests/test_response_model_include_exclude.py::test_nested_include_simple",
+        "tests/test_jsonable_encoder.py::test_encode_dict_include_exclude_list"
+      ],
+      "provider": "openai",
+      "model": "glm-5.3",
+      "verified": true
+    }
+  ]
+}

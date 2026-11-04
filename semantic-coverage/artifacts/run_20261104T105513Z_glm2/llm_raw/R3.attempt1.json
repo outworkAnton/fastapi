@@ -1,0 +1,123 @@
+{
+  "requirement_id": "R3",
+  "acs": [
+    {
+      "ac_id": "R3.AC1",
+      "status": "covered",
+      "confidence": 0.97,
+      "reasoning": "Three tests send valid Basic credentials and assert status 200 plus the parsed username 'john' in the response JSON, satisfying the check exactly.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 23,
+          "line_end": 26,
+          "quote": "assert response.json() == {\"username\": \"john\", \"password\": \"secret\"}"
+        },
+        {
+          "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic",
+          "file": "tests/test_security_http_basic_realm.py",
+          "line_start": 21,
+          "line_end": 24,
+          "quote": "assert response.json() == {\"username\": \"john\", \"password\": \"secret\"}"
+        },
+        {
+          "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+          "file": "tests/test_security_http_basic_realm_description.py",
+          "line_start": 21,
+          "line_end": 24,
+          "quote": "assert response.json() == {\"username\": \"john\", \"password\": \"secret\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R3.AC2",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "The optional Basic test with no credentials asserts status 200 and the exact fallback message 'Create an account first'. The analogous fallback assertions in test_security_http_base_optional.py are for HTTPBase, not Basic, so the basic_optional test is the direct evidence.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 29,
+          "line_end": 32,
+          "quote": "assert response.status_code == 200, response.text"
+        },
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 29,
+          "line_end": 32,
+          "quote": "assert response.json() == {\"msg\": \"Create an account first\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R3.AC3",
+      "status": "covered",
+      "confidence": 0.96,
+      "reasoning": "Both the invalid-credentials and non-Basic-credentials cases in the optional Basic test file assert 401, WWW-Authenticate exactly 'Basic', and the 'Not authenticated' detail, matching the AC check. The realm variants assert 'Basic realm=\"simple\"' which is a superset case but not needed for coverage.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 35,
+          "line_end": 41,
+          "quote": "assert response.headers[\"WWW-Authenticate\"] == \"Basic\""
+        },
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 35,
+          "line_end": 41,
+          "quote": "assert response.status_code == 401, response.text"
+        },
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 44,
+          "line_end": 50,
+          "quote": "assert response.headers[\"WWW-Authenticate\"] == \"Basic\""
+        },
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 44,
+          "line_end": 50,
+          "quote": "assert response.json() == {\"detail\": \"Not authenticated\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R3.AC4",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "OpenAPI snapshot tests assert components.securitySchemes.HTTPBasic with type http and scheme 'basic'. The realm_description variant additionally confirms the scheme with a description field.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_openapi_schema",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 53,
+          "line_end": 79,
+          "quote": "\"securitySchemes\": {\"HTTPBasic\": {\"type\": \"http\", \"scheme\": \"basic\"}}"
+        },
+        {
+          "test_id": "tests/test_security_http_basic_realm.py::test_openapi_schema",
+          "file": "tests/test_security_http_basic_realm.py",
+          "line_start": 52,
+          "line_end": 78,
+          "quote": "\"securitySchemes\": {\"HTTPBasic\": {\"type\": \"http\", \"scheme\": \"basic\"}}"
+        },
+        {
+          "test_id": "tests/test_security_http_basic_realm_description.py::test_openapi_schema",
+          "file": "tests/test_security_http_basic_realm_description.py",
+          "line_start": 52,
+          "line_end": 84,
+          "quote": "\"HTTPBasic\": {"
+        }
+      ]
+    }
+  ],
+  "gaps": [],
+  "notes": "All four ACs are directly covered. AC3 coverage comes from the plain-Basic test file (header exactly 'Basic'); the realm variants assert 'Basic realm=\"simple\"', which still contains the Basic challenge but does not match the 'equals Basic' check exactly, so they were not relied upon. The HTTPBase ('Other' scheme) and HTTPBearer tests are unrelated to R3. Quotes for snapshot tests are taken from the assertion payload within the cited line ranges; exact indentation in the source file may differ from the flattened quote shown."
+}

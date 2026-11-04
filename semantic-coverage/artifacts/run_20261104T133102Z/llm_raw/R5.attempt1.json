@@ -1,0 +1,112 @@
+{
+  "requirement_id": "R5",
+  "acs": [
+    {
+      "ac_id": "R5.AC1",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Top-level stripping is directly verified: the tests assert exact equality of response.json() to an object containing only email, which proves extra fields (e.g. password) are stripped at the top level by response_model. Two independent test files cover this.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+          "file": "tests/test_response_model_data_filter.py",
+          "line_start": 59,
+          "line_end": 63,
+          "quote": "assert response.json() == {\"email\": \"johndoe@example.com\"}"
+        },
+        {
+          "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+          "file": "tests/test_response_model_data_filter_no_inheritance.py",
+          "line_start": 61,
+          "line_end": 65,
+          "quote": "assert response.json() == {\"email\": \"johndoe@example.com\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R5.AC2",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Nested-model stripping is verified: the assertions compare response.json() to objects whose nested owner contains only email, confirming extra fields are stripped one level down. Both single-object and list-of-models variants are present in two test files.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+          "file": "tests/test_response_model_data_filter.py",
+          "line_start": 66,
+          "line_end": 71,
+          "quote": "assert response.json() == {\n    \"name\": \"Nibbler\",\n    \"owner\": {\"email\": \"johndoe@example.com\"},\n}"
+        },
+        {
+          "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+          "file": "tests/test_response_model_data_filter_no_inheritance.py",
+          "line_start": 68,
+          "line_end": 73,
+          "quote": "assert response.json() == {\n    \"name\": \"Nibbler\",\n    \"owner\": {\"email\": \"johndoe@example.com\"},\n}"
+        },
+        {
+          "test_id": "tests/test_response_model_data_filter.py::test_list_of_models",
+          "file": "tests/test_response_model_data_filter.py",
+          "line_start": 74,
+          "line_end": 79,
+          "quote": "assert response.json() == [\n    {\"name\": \"Nibbler\", \"owner\": {\"email\": \"johndoe@example.com\"}},\n    {\"name\": \"Zoidberg\", \"owner\": {\"email\": \"johndoe@example.com\"}},\n]"
+        }
+      ]
+    },
+    {
+      "ac_id": "R5.AC3",
+      "status": "covered",
+      "confidence": 0.85,
+      "reasoning": "Dedicated include/exclude tests assert the exact filtered JSON: test_nested_include_simple verifies only included fields are present, and test_nested_exclude_simple / test_nested_exclude_simple_dict verify excluded fields are absent. The assertions match the AC keywords (include, exclude, response.json()); the endpoint decorators using response_model_include/response_model_exclude are not shown in the snippets but the file name and exact filtered outputs strongly indicate endpoint-level coverage.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_include_exclude.py::test_nested_include_simple",
+          "file": "tests/test_response_model_include_exclude.py",
+          "line_start": 116,
+          "line_end": 124,
+          "quote": "assert response.status_code == 200, response.text\nassert response.json() == {\n    \"baz\": \"simple_include model2 baz\",\n    \"ref\": {\"foo\": \"simple_include model foo\"},\n}"
+        },
+        {
+          "test_id": "tests/test_response_model_include_exclude.py::test_nested_exclude_simple",
+          "file": "tests/test_response_model_include_exclude.py",
+          "line_start": 138,
+          "line_end": 144,
+          "quote": "assert response.status_code == 200, response.text\nassert response.json() == {\n    \"baz\": \"simple_exclude model2 baz\",\n    \"ref\": {\"foo\": \"simple_exclude model foo\"},\n}"
+        },
+        {
+          "test_id": "tests/test_response_model_include_exclude.py::test_nested_exclude_simple_dict",
+          "file": "tests/test_response_model_include_exclude.py",
+          "line_start": 147,
+          "line_end": 153,
+          "quote": "assert response.status_code == 200, response.text\nassert response.json() == {\n    \"baz\": \"simple_exclude_dict model2 baz\",\n    \"ref\": {\"foo\": \"simple_exclude_dict model foo\"},\n}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R5.AC4",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "A dedicated test asserts that registering a route with an invalid (non-Pydantic) response_model raises FastAPIError at app definition time, exactly matching the AC check (pytest.raises on invalid response model). test_invalid_response_model_field provides additional coverage of a related invalid-response-model error path.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+          "file": "tests/test_response_model_invalid.py",
+          "line_start": 10,
+          "line_end": 16,
+          "quote": "with pytest.raises(FastAPIError):\n    app = FastAPI()\n\n    @app.get(\"/\", response_model=NonPydanticModel)\n    def read_root():\n        pass"
+        },
+        {
+          "test_id": "tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field",
+          "file": "tests/test_response_model_as_return_annotation.py",
+          "line_start": 499,
+          "line_end": 508,
+          "quote": "with pytest.raises(FastAPIError) as e:\n\n    @app.get(\"/\")\n    def read_root() -> Response | None:\n        return Response(content=\"Foo\")"
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    "AC3: the provided snippets do not show the endpoint definitions using response_model_include/response_model_exclude decorators; coverage is inferred from test names, file name, and exact filtered JSON assertions (confidence slightly reduced).",
+    "AC3: no explicit top-level (non-nested) include/exclude endpoint assertion is present in the snippet list; all shown include/exclude assertions are on nested structures."
+  ],
+  "notes": "AC1/AC2 are covered twice (tests/test_response_model_data_filter.py and its no_inheritance variant), giving strong redundancy. The ResponseValidationError tests (test_response_model_as_return_annotation.py lines 278-325, 400-409) test invalid return data against a valid response_model, not an invalid response_model, so they were not counted as primary evidence for AC4. tests/test_jsonable_encoder.py::test_encode_dict_include_exclude_list exercises jsonable_encoder directly rather than endpoint-level response_model_include/exclude, so it was not used as evidence for AC3. The security http basic tests returning username/password are unrelated to response_model filtering."
+}

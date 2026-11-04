@@ -1,6 +1,6 @@
 # Demo Summary
 
-**Прогон**: `run_20261103T224401Z` · **Репозиторий**: `fastapi/fastapi` @ `5cb6272` · **Режим**: offline (LLM не использовался)
+**Прогон**: `run_20261104T133102Z` · **Репозиторий**: `fastapi/fastapi` @ `61ae793` (форк; тесты идентичны upstream `5cb6272`) · **Режим**: LLM `glm-5.3` (validator=openai); offline-прогон `run_20261103T224401Z` сохранён как детерминированный baseline
 
 ---
 
@@ -10,12 +10,12 @@
 
 | Требование | Coverage | Confidence | Что подтверждено |
 |---|---|---|---|
-| R1. Валидация тела по Pydantic | **100%** | 0.80 | 200 + эхо, 422 missing, 422 greater_than, required в OpenAPI |
-| R2. DI: кэш и teardown | **89%** | 0.74 | use_cache=True/False, dependency_overrides, teardown — частично |
-| R3. HTTP Basic | **100%** | 0.80 | 200 + username, fallback без кредов, 401 + WWW-Authenticate: Basic, securitySchemes |
-| R4. Обработка ошибок | **100%** | 0.80 | кастомные handler'ы, 500, traceback до строки raise |
-| R5. `response_model` | **100%** | 0.78 | top-level и nested фильтрация, exclude, invalid model |
-| **Итого** | **97.8%** | — | 21 цитата, 20 уникальных тестов |
+| R1. Валидация тела по Pydantic | **100%** | 0.92 | 200 + эхо, 422 missing, 422 greater_than, required в OpenAPI |
+| R2. DI: кэш и teardown | **89%** | 0.81 | use_cache=True/False, dependency_overrides, teardown — частично |
+| R3. HTTP Basic | **100%** | 0.96 | 200 + username, fallback без кредов, 401 + WWW-Authenticate: Basic, securitySchemes |
+| R4. Обработка ошибок | **100%** | 0.95 | кастомные handler'ы, 500, traceback до строки raise |
+| R5. `response_model` | **100%** | 0.93 | top-level и nested фильтрация, exclude, invalid model |
+| **Итого** | **97.8%** | — | 42 цитаты, 39 уникальных тестов |
 
 Качество поиска: **Precision@5 = 0.92**, **Recall@pool = 0.96**, **стабильность = 1.0**.
 
@@ -29,7 +29,7 @@
 
 ### 2. Найден содержательный разрыв (R2.AC4)
 
-«Yield-зависимость выполняет teardown» получила `partial`. В выборке есть `tests/test_dependency_contextmanager.py`, где teardown проверяется прямо (`state["/sync"] == "generator completed"`), но слово `contextmanager` встречается только в имени функции. Лексический offline-валидатор этого не увидел и выбрал тест про exception after yield.
+«Yield-зависимость выполняет teardown» получила `partial` — и в offline-baseline, и у LLM-валидатора, независимо. Прямой тест teardown (`tests/test_dependency_contextmanager.py`, `state["/sync"] == "generator completed"`) не попал в пул R2 — это тот же retrieval-пробел, что даёт Recall@pool 0.96. LLM (glm-5.3) рассуждает семантически: teardown доказан только косвенно — тестами с 503 «Exception after yield», а прямого ассерта на teardown после успешного ответа среди кандидатов нет. Два независимых механизма сошлись на одной оценке — пограничный случай помечен честно.
 
 Это **false negative системы**, а не пробел в тестах. Он оставлен как есть, помечен `partial` и вынесен в `gaps` — именно такими примерами измеряется ценность LLM-валидации.
 
@@ -69,7 +69,7 @@
 
 ## Ограничения демонстрации
 
-- LLM-режим реализован, но не выполнялся: нет ключа. Все оценки получены offline-валидатором.
+- Финальный прогон выполнен LLM-валидатором (`glm-5.3`): 5 вызовов, 0 retry, agreement с offline-baseline 20/20, повторный прогон воспроизвёл статусы 20/20.
 - Gold set: 35 пар (25 из top-5 + 10 экспертных). Размечены не все кандидаты top-10.
 - Тесты не исполняются: проверяется наличие и содержание проверок, а не их прохождение.
 - Один репозиторий и один фреймворк.

@@ -11,8 +11,8 @@
 | | |
 |---|---|
 | Пайплайн | работает, `verify` — 10/10 PASS |
-| Режим валидации | `offline` (LLM-ключ не предоставлен) |
-| Прогон | `artifacts/run_20261103T224401Z` |
+| Режим валидации | LLM `glm-5.3` через OpenAI-совместимый API (5 вызовов, temperature=0, seed=42) |
+| Прогон | `artifacts/run_20261104T133102Z` |
 | Тесты | `pytest demo/tests` — 11 passed |
 | Публикация форка | **выполнена**: [`outworkAnton/fastapi`, ветка `semantic-coverage-demo`](https://github.com/outworkAnton/fastapi/tree/semantic-coverage-demo) |
 
@@ -82,9 +82,9 @@ pytest demo/tests -q
 
 ```dotenv
 # .env
-LLM_BASE_URL=https://api.deepseek.com/v1
+LLM_BASE_URL=https://api.z.ai/api/coding/paas/v4
 LLM_API_KEY=<key>
-LLM_MODEL=deepseek/deepseek-flash
+LLM_MODEL=glm-5.3
 ```
 
 ```powershell
@@ -103,12 +103,11 @@ python -m demo.cli report
 | Тестов без assert | 0 |
 | Покрытие (невзвешенное / взвешенное) | 97.8% / 97.8% |
 | R1 / R2 / R3 / R4 / R5 | 100 / 89 / 100 / 100 / 100 |
-| Цитат / уникальных тестов | 21 / 20 |
+| Цитат / уникальных тестов | 42 / 39 (все верифицированы evidence gate, 0 отклонений) |
 | Precision@5 | 0.92 |
 | Recall@pool | 0.96 |
 | Стабильность (Jaccard × 3) | 1.00 |
-| Время полного прогона | 21.55 с |
-| LLM-вызовов | 0 |
+| LLM-фаза | 138 с: 5 вызовов `glm-5.3`, все ответы распарсены с первой попытки |
 
 ---
 
@@ -131,7 +130,7 @@ python -m demo.cli report
 | `chromadb` | numpy + `sentence-transformers` | Убирает скрытую загрузку англоязычной ONNX-модели; для 649 тестов ANN не нужен |
 | 2 ранкера | 3 ранкера (+ keyword) | Векторный ранкер шумит и вытеснял точные совпадения; RRF по трём ранкам убрал ложные срабатывания на контрольных файлах |
 | gold set на уровне AC | на уровне требования | P@5 в ТЗ определён как `top5(R)`; разметка 25 пар top-5 + 10 экспертных |
-| `validator=openai` по умолчанию | `offline` | Ключ не предоставлен; LLM-путь реализован и готов |
+| `validator=openai` по умолчанию | выполнено: LLM `glm-5.3` | Ключа изначально не было — первый полный прогон сделан offline-валидатором; после предоставления ключа финальный прогон перевыполнен на LLM, offline сохранён как детерминированный baseline |
 | `pool_cap` 25 | 25 | совпадает |
 
 ---
@@ -140,7 +139,7 @@ python -m demo.cli report
 
 Демонстрация опубликована: **[`outworkAnton/fastapi`, ветка `semantic-coverage-demo`](https://github.com/outworkAnton/fastapi/tree/semantic-coverage-demo)**, папка `semantic-coverage/`.
 
-Содержимое папки: `TZ_AGENT.md`, четыре deliverable, `AI_USAGE_LOG.md`, `requirements.txt`, `.env.example`, `demo/` (пайплайн и тесты), `artifacts/run_*/` — все четыре прогона, включая первый offline-прогон с некорректными доказательствами: история итераций сохранена, а не вычищена.
+Содержимое папки: `TZ_AGENT.md`, четыре deliverable, `AI_USAGE_LOG.md`, `requirements.txt`, `.env.example`, `demo/` (пайплайн и тесты), `artifacts/run_*/` — все прогоны, включая LLM-эксперименты (бесплатная Nemotron с нестабильными статусами — 8 её неточных цитат отклонены evidence gate; контрольные прогоны `glm-5.3`) и первый offline-прогон с некорректными доказательствами: история итераций сохранена, а не вычищена.
 
 Быстрая проверка после клонирования форка: скопировать `semantic-coverage/demo` и `semantic-coverage/requirements.txt`, выполнить команды из раздела «Быстрый старт», затем `python -m demo.cli verify` — ожидается 10/10 PASS.
 

@@ -1,0 +1,102 @@
+{
+  "requirement_id": "R1",
+  "acs": [
+    {
+      "ac_id": "R1.AC1",
+      "status": "covered",
+      "confidence": 0.9,
+      "reasoning": "test_put_correct_body sends a correct request body, asserts status_code == 200, and asserts response.json() equals a snapshot containing the submitted item payload (echo). test_model_body_alias_choice_preserves_nested_errors also asserts a 200 with an echoed body-model response as secondary evidence.",
+      "evidence": [
+        {
+          "test_id": "tests/test_multi_body_errors.py::test_put_correct_body",
+          "file": "tests/test_multi_body_errors.py",
+          "line_start": 25,
+          "line_end": 37,
+          "quote": "assert response.status_code == 200, response.text\n    assert response.json() == snapshot(\n        {\n            \"item\": ["
+        },
+        {
+          "test_id": "tests/test_body_alias_choices.py::test_model_body_alias_choice_preserves_nested_errors",
+          "file": "tests/test_body_alias_choices.py",
+          "line_start": 196,
+          "line_end": 225,
+          "quote": "assert response.status_code == 200\n    assert response.json() == {\"count\": 1}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R1.AC2",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Multiple tests assert 422 with detail type 'missing' and a loc rooted at 'body' for omitted/empty required body fields (union form normalization, embedded body, absent body for required argument). This satisfies the check: status_code == 422, detail contains missing and loc.",
+      "evidence": [
+        {
+          "test_id": "tests/test_union_form_normalization.py::test_empty_scalar_is_missing",
+          "file": "tests/test_union_form_normalization.py",
+          "line_start": 148,
+          "line_end": 153,
+          "quote": "assert response.status_code == 422\n    assert error[\"type\"] == \"missing\"\n    assert error[\"loc\"] == [\"body\", branch, \"value\"]"
+        },
+        {
+          "test_id": "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+          "file": "tests/test_body_alias_choices.py",
+          "line_start": 134,
+          "line_end": 142,
+          "quote": "assert response.status_code == 422\n    assert [(error[\"type\"], error[\"loc\"]) for error in response.json()[\"detail\"]] == [\n        (\"missing\", [\"body\", \"items\"]),\n        (\"missing\", [\"body\", \"first\"]),\n    ]"
+        },
+        {
+          "test_id": "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_absent_body_for_required_argument",
+          "file": "tests/test_request_params/test_body/test_nullable_and_defaults.py",
+          "line_start": 133,
+          "line_end": 139,
+          "quote": "assert response.status_code == 422\n    assert [(error[\"type\"], error[\"loc\"]) for error in response.json()[\"detail\"]] == [\n        (\"missing\", location),\n    ]"
+        }
+      ]
+    },
+    {
+      "ac_id": "R1.AC3",
+      "status": "covered",
+      "confidence": 0.9,
+      "reasoning": "test_jsonable_encoder_requiring_error asserts 422 with detail type 'greater_than' and loc ['body', 0, 'age'], i.e., a value-constraint violation on a request-body Pydantic model. The tests/test_path.py greater_than tests also assert 422/greater_than but on path parameters, so they are not counted as primary body-validation evidence.",
+      "evidence": [
+        {
+          "test_id": "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+          "file": "tests/test_multi_body_errors.py",
+          "line_start": 40,
+          "line_end": 53,
+          "quote": "assert response.status_code == 422, response.text\n    assert response.json() == {\n        \"detail\": [\n            {\n                \"type\": \"greater_than\",\n                \"loc\": [\"body\", 0, \"age\"],"
+        }
+      ]
+    },
+    {
+      "ac_id": "R1.AC4",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Multiple schema tests assert app.openapi()['components']['schemas'][model] contains a 'required' list naming the body field (e.g., required: ['p'], ['p_alias'], ['p_val_alias']). test_get_request_body.py::test_openapi_schema also asserts the Product body schema with required: ['name', 'price'].",
+      "evidence": [
+        {
+          "test_id": "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+          "file": "tests/test_request_params/test_body/test_required_str.py",
+          "line_start": 35,
+          "line_end": 46,
+          "quote": "assert app.openapi()[\"components\"][\"schemas\"][body_model_name] == {\n        \"properties\": {\n            \"p\": {\"title\": \"P\", \"type\": \"string\"},\n        },\n        \"required\": [\"p\"],"
+        },
+        {
+          "test_id": "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+          "file": "tests/test_request_params/test_body/test_list.py",
+          "line_start": 35,
+          "line_end": 50,
+          "quote": "assert app.openapi()[\"components\"][\"schemas\"][body_model_name] == {\n        \"properties\": {\n            \"p\": {\n                \"items\": {\"type\": \"string\"},\n                \"title\": \"P\",\n                \"type\": \"array\",\n            },\n        },\n        \"required\": [\"p\"],"
+        },
+        {
+          "test_id": "tests/test_get_request_body.py::test_openapi_schema",
+          "file": "tests/test_get_request_body.py",
+          "line_start": 29,
+          "line_end": 114,
+          "quote": "\"Product\": {\n                        \"title\": \"Product\",\n                        \"required\": [\"name\", \"price\"],"
+        }
+      ]
+    }
+  ],
+  "gaps": [],
+  "notes": "All four ACs are covered. Scope decisions: (1) tests/test_path.py greater_than tests (test_path_param_gt0_0, test_path_param_gt_2, test_path_param_lt_gt_0, test_path_param_lt_gt_int_0, test_path_param_gt_int_2) assert 422/greater_than/loc but on path parameters, not request bodies, so they were not counted toward R1.AC3; AC3 is satisfied by the body-loc test. (2) test_main_depends asserts a 'missing' 422 but for a query parameter, so it was not counted toward R1.AC2. (3) The tutorial openapi snapshot (test_bigger_applications/test_main.py::test_openapi_schema) asserts 'required' only on non-body parameters/ValidationError schema, so it was not counted toward R1.AC4; dedicated body-schema tests cover it. (4) AC1 evidence relies on test_put_correct_body, whose response echoes the submitted item payload under the 'item' key."
+}
