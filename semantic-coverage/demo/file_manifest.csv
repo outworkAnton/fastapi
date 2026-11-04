@@ -1,0 +1,51 @@
+path,tests_count,domain,selected_reason,in_scope
+tests/test_request_params/test_body/test_required_str.py,16,R1,request body validation domain,1
+tests/test_request_params/test_body/test_optional_str.py,24,R1,request body validation domain,1
+tests/test_request_params/test_body/test_optional_list.py,24,R1,request body validation domain,1
+tests/test_request_params/test_body/test_nullable_and_defaults.py,16,R1,request body validation domain,1
+tests/test_request_params/test_body/test_list.py,16,R1,request body validation domain,1
+tests/test_multi_body_errors.py,4,R1,request body validation domain,1
+tests/test_body_alias_choices.py,12,R1,request body validation domain,1
+tests/test_union_body.py,3,R1,request body validation domain,1
+tests/test_union_body_discriminator.py,1,R1,request body validation domain,1
+tests/test_get_request_body.py,2,R1,request body validation domain,1
+tests/test_dependency_cache.py,4,R2,dependency injection and caching domain,1
+tests/test_dependency_overrides.py,25,R2,dependency injection and caching domain,1
+tests/test_dependency_contextmanager.py,22,R2,dependency injection and caching domain,1
+tests/test_dependency_yield_scope.py,11,R2,dependency injection and caching domain,1
+tests/test_dependency_models.py,10,R2,dependency injection and caching domain,1
+tests/test_dependency_duplicates.py,5,R2,dependency injection and caching domain,1
+tests/test_dependency_class.py,1,R2,dependency injection and caching domain,1
+tests/test_dependency_paramless.py,4,R2,dependency injection and caching domain,1
+tests/test_dependency_partial.py,1,R2,dependency injection and caching domain,1
+tests/test_dependency_wrapped.py,1,R2,dependency injection and caching domain,1
+tests/test_security_http_basic_optional.py,5,R3,HTTP security scheme domain,1
+tests/test_security_http_basic_realm.py,5,R3,HTTP security scheme domain,1
+tests/test_security_http_basic_realm_description.py,5,R3,HTTP security scheme domain,1
+tests/test_security_http_base.py,4,R3,HTTP security scheme domain,1
+tests/test_security_http_base_optional.py,5,R3,HTTP security scheme domain,1
+tests/test_exception_handlers.py,5,R4,exception handling domain,1
+tests/test_validation_error_context.py,7,R4,exception handling domain,1
+tests/test_starlette_exception.py,7,R4,exception handling domain,1
+tests/test_custom_middleware_exception.py,2,R4,exception handling domain,1
+tests/test_additional_responses_custom_validationerror.py,1,R4,exception handling domain,1
+tests/test_additional_responses_default_validationerror.py,1,R4,exception handling domain,1
+tests/test_pydantic_v1_error.py,6,R4,exception handling domain,1
+tests/test_response_model_data_filter.py,3,R5,response model serialization domain,1
+tests/test_response_model_data_filter_no_inheritance.py,3,R5,response model serialization domain,1
+tests/test_response_model_include_exclude.py,6,R5,response model serialization domain,1
+tests/test_response_by_alias.py,10,R5,response model serialization domain,1
+tests/test_response_model_as_return_annotation.py,38,R5,response model serialization domain,1
+tests/test_serialize_response_model.py,8,R5,response model serialization domain,1
+tests/test_response_model_invalid.py,4,R5,response model serialization domain,1
+tests/test_response_model_sub_types.py,2,R5,response model serialization domain,1
+tests/test_path.py,75,control,"negative control, unrelated domain",1
+tests/test_router_include_context.py,42,control,"negative control, unrelated domain",1
+tests/test_query.py,29,control,"negative control, unrelated domain",1
+tests/test_sse.py,27,control,"negative control, unrelated domain",1
+tests/test_union_form_normalization.py,27,control,"negative control, unrelated domain",1
+tests/test_jsonable_encoder.py,26,control,"negative control, unrelated domain",1
+tests/test_params_repr.py,26,control,"negative control, unrelated domain",1
+tests/test_telemetry/test_http.py,23,control,"negative control, unrelated domain",1
+tests/test_header_cookie_alias_choices.py,20,control,"negative control, unrelated domain",1
+tests/test_tutorial/test_bigger_applications/test_main.py,25,control,"negative control, unrelated domain",1

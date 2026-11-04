@@ -1,0 +1,42 @@
+# Gold set for requirement-level retrieval quality.
+# Rubric: a pair is relevant (1) if the test would fail when the behavior described
+# by the requirement is broken. Irrelevant (0) otherwise. Unlabeled pairs are not
+# counted as relevant in P@5.
+# label_source: agent-top5-review = all top-5 candidates judged; expert = known
+# relevant tests added independently to measure recall.
+requirement_id,test_id,relevant,rationale,label_source
+R1,tests/test_union_form_normalization.py::test_empty_scalar_is_missing,0,"multipart form normalization, not Pydantic JSON body validation",agent-top5-review
+R1,tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error,1,"asserts 422 with greater_than and loc for a body value constraint",agent-top5-review
+R1,tests/test_request_params/test_body/test_list.py::test_required_list_str_schema,1,"asserts OpenAPI schema marks the body field required",agent-top5-review
+R1,tests/test_request_params/test_body/test_required_str.py::test_required_str_schema,1,"asserts OpenAPI schema marks the body field required",agent-top5-review
+R1,tests/test_path.py::test_path_param_gt0_0,0,"path parameter validation, not request body",agent-top5-review
+R2,tests/test_dependency_cache.py::test_sub_counter_no_cache,1,"asserts dependency called twice when use_cache=False",agent-top5-review
+R2,tests/test_dependency_cache.py::test_sub_counter,1,"asserts dependency called once per request",agent-top5-review
+R2,tests/test_dependency_cache.py::test_security_cache,1,"asserts cached Security dependency result",agent-top5-review
+R2,tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar,1,"asserts dependency_overrides replaces a nested dependency",agent-top5-review
+R2,tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends,1,"asserts dependency_overrides replaces a nested dependency",agent-top5-review
+R3,tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials,1,"asserts 401 and WWW-Authenticate for a non-Basic header",agent-top5-review
+R3,tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials,1,"asserts 401 and realm challenge for a non-Basic header",agent-top5-review
+R3,tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials,1,"asserts 401 and realm challenge for a non-Basic header",agent-top5-review
+R3,tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials,1,"asserts 401 and WWW-Authenticate for invalid credentials",agent-top5-review
+R3,tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials,1,"asserts optional Basic returns the fallback body",agent-top5-review
+R4,tests/test_exception_handlers.py::test_override_request_validation_exception,1,"asserts custom RequestValidationError handler response",agent-top5-review
+R4,tests/test_exception_handlers.py::test_override_server_error_exception_response,1,"asserts custom handler returns 500 for unhandled error",agent-top5-review
+R4,tests/test_exception_handlers.py::test_override_http_exception,1,"asserts custom HTTPException handler response",agent-top5-review
+R4,tests/test_custom_middleware_exception.py::test_custom_middleware_exception_not_raised,1,"exercises custom middleware exception handling",agent-top5-review
+R4,tests/test_telemetry/test_http.py::test_custom_error_handler_sees_span,1,"exercises a custom error handler path",agent-top5-review
+R5,tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model,1,"asserts extra fields stripped at top level",agent-top5-review
+R5,tests/test_response_model_data_filter.py::test_filter_top_level_model,1,"asserts extra fields stripped at top level",agent-top5-review
+R5,tests/test_response_model_data_filter.py::test_filter_second_level_model,1,"asserts extra fields stripped in a nested model",agent-top5-review
+R5,tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model,1,"asserts extra fields stripped in a nested model",agent-top5-review
+R5,tests/test_response_model_data_filter.py::test_list_of_models,1,"asserts filtering for a list of response models",agent-top5-review
+R1,tests/test_multi_body_errors.py::test_put_correct_body,1,"asserts 200 and echoed payload for a valid body",expert
+R1,tests/test_request_params/test_body/test_required_str.py::test_required_str_missing,1,"asserts 422 missing field with loc for a required body field",expert
+R2,tests/test_dependency_cache.py::test_normal_counter,1,"asserts dependency is re-invoked across requests",expert
+R2,tests/test_dependency_cache.py::test_sub_counter_no_cache,1,"asserts cache bypass for a nested dependency",expert
+R3,tests/test_security_http_basic_optional.py::test_security_http_basic,1,"asserts 200 and username for valid Basic credentials",expert
+R3,tests/test_security_http_basic_optional.py::test_openapi_schema,1,"asserts HTTPBasic in OpenAPI securitySchemes",expert
+R4,tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield,1,"asserts traceback points at the original raise line",expert
+R4,tests/test_exception_handlers.py::test_override_server_error_exception_raises,1,"asserts unhandled error propagates when raise_server_exceptions=True",expert
+R5,tests/test_response_model_include_exclude.py::test_nested_exclude_simple,1,"asserts nested exclude removes fields",expert
+R5,tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field,1,"asserts invalid response model raises FastAPIError",expert

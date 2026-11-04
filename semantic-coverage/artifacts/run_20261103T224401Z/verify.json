@@ -1,0 +1,52 @@
+[
+  {
+    "check": "evidence quotes resolve verbatim",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "evidence points to real test functions only",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "coverage derived from AC weights and statuses",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "5 requirements with >=3 AC each",
+    "ok": true,
+    "detail": "{'R1': 4, 'R2': 4, 'R3': 4, 'R4': 4, 'R5': 4}"
+  },
+  {
+    "check": "manifest <=50 in-scope files, all present",
+    "ok": true,
+    "detail": "rows=50 missing=[]"
+  },
+  {
+    "check": "gold set >=20 pairs with both labels",
+    "ok": true,
+    "detail": "pairs=35 labels=['0', '1']"
+  },
+  {
+    "check": "run_meta has required fields",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "report numbers traceable to report.json",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "no production files in matched tests",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "evidence items collected",
+    "ok": true,
+    "detail": "total=21"
+  }
+]

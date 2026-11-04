@@ -1,0 +1,1405 @@
+{
+  "rrf_k": 60,
+  "depth": 20,
+  "per_ac": 10,
+  "pool_cap": 25,
+  "embedding_backend": "st:paraphrase-multilingual-MiniLM-L12-v2",
+  "embedding_cache_hit": true,
+  "requirements": {
+    "R1": {
+      "per_ac": {
+        "R1.AC1": [
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_request_scope",
+            "rrf": 0.029727,
+            "bm25_rank": 15,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_explicit_null_bare_body",
+            "rrf": 0.02895,
+            "bm25_rank": 18,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+            "rrf": 0.026857,
+            "bm25_rank": 13,
+            "vector_rank": 16
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_request",
+            "rrf": 0.026547,
+            "bm25_rank": 12,
+            "vector_rank": 19
+          },
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_request_validation_exception",
+            "rrf": 0.016393,
+            "bm25_rank": 1,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_validation_error_body_for_missing_and_null",
+            "rrf": 0.016129,
+            "bm25_rank": 2,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+            "rrf": 0.015873,
+            "bm25_rank": 3,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_query.py::test_query_int_query_42",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_multi_body_errors.py::test_put_correct_body",
+            "rrf": 0.015625,
+            "bm25_rank": 4,
+            "vector_rank": null
+          }
+        ],
+        "R1.AC2": [
+          {
+            "test_id": "tests/test_union_form_normalization.py::test_empty_scalar_is_missing",
+            "rrf": 0.031514,
+            "bm25_rank": 2,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_absent_body_for_required_argument",
+            "rrf": 0.031025,
+            "bm25_rank": 6,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_union_form_normalization.py::test_omitted_list_is_missing",
+            "rrf": 0.030886,
+            "bm25_rank": 9,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_union_form_normalization.py::test_empty_multipart_scalar_is_missing",
+            "rrf": 0.029851,
+            "bm25_rank": 7,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_tutorial/test_bigger_applications/test_main.py::test_put_no_header",
+            "rrf": 0.028783,
+            "bm25_rank": 16,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_required_str.py::test_required_validation_alias_missing",
+            "rrf": 0.016393,
+            "bm25_rank": 1,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_union_form_normalization.py::test_discriminator_errors_are_preserved",
+            "rrf": 0.016129,
+            "bm25_rank": null,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_list.py::test_required_list_validation_alias_missing",
+            "rrf": 0.015873,
+            "bm25_rank": 3,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_required_str.py::test_required_alias_and_validation_alias_missing",
+            "rrf": 0.015625,
+            "bm25_rank": 4,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+            "rrf": 0.015385,
+            "bm25_rank": 5,
+            "vector_rank": null
+          }
+        ],
+        "R1.AC3": [
+          {
+            "test_id": "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+            "rrf": 0.031545,
+            "bm25_rank": 1,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_union_form_normalization.py::test_discriminator_errors_are_preserved",
+            "rrf": 0.028577,
+            "bm25_rank": 11,
+            "vector_rank": 9
+          },
+          {
+            "test_id": "tests/test_path.py::test_path_param_gt0_0",
+            "rrf": 0.028373,
+            "bm25_rank": 3,
+            "vector_rank": 20
+          },
+          {
+            "test_id": "tests/test_path.py::test_path_param_lt_gt_int_0",
+            "rrf": 0.027651,
+            "bm25_rank": 9,
+            "vector_rank": 16
+          },
+          {
+            "test_id": "tests/test_path.py::test_path_param_lt_gt_0",
+            "rrf": 0.027584,
+            "bm25_rank": 7,
+            "vector_rank": 19
+          },
+          {
+            "test_id": "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_foo_with_no_token",
+            "rrf": 0.016393,
+            "bm25_rank": null,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_custom_middleware_exception.py::test_custom_middleware_exception",
+            "rrf": 0.016129,
+            "bm25_rank": null,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_path.py::test_path_param_gt_2",
+            "rrf": 0.016129,
+            "bm25_rank": 2,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_path.py::test_path_param_le_int_42",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_main_depends",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          }
+        ],
+        "R1.AC4": [
+          {
+            "test_id": "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+            "rrf": 0.032522,
+            "bm25_rank": 2,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+            "rrf": 0.032522,
+            "bm25_rank": 1,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_router_include_context.py::test_get_openapi_accepts_webhook_route_contexts",
+            "rrf": 0.030118,
+            "bm25_rank": 9,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_starlette_exception.py::test_openapi_schema",
+            "rrf": 0.029958,
+            "bm25_rank": 11,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_sse.py::test_default_response_class_on_app_openapi_schema",
+            "rrf": 0.028778,
+            "bm25_rank": 10,
+            "vector_rank": 9
+          },
+          {
+            "test_id": "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+            "rrf": 0.028405,
+            "bm25_rank": 13,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_optional_list.py::test_optional_list_str_schema",
+            "rrf": 0.027652,
+            "bm25_rank": 20,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_router_include_context.py::test_effective_body_fields_from_app_router_include_and_route_match_openapi",
+            "rrf": 0.027584,
+            "bm25_rank": 19,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_sse.py::test_default_response_class_on_parent_router_openapi_schema",
+            "rrf": 0.027222,
+            "bm25_rank": 12,
+            "vector_rank": 15
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_required_str.py::test_required_str_alias_schema",
+            "rrf": 0.015873,
+            "bm25_rank": 3,
+            "vector_rank": null
+          }
+        ]
+      },
+      "pool": [
+        "tests/test_union_form_normalization.py::test_discriminator_errors_are_preserved",
+        "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+        "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+        "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+        "tests/test_union_form_normalization.py::test_empty_scalar_is_missing",
+        "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+        "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_absent_body_for_required_argument",
+        "tests/test_union_form_normalization.py::test_omitted_list_is_missing",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_webhook_route_contexts",
+        "tests/test_starlette_exception.py::test_openapi_schema",
+        "tests/test_union_form_normalization.py::test_empty_multipart_scalar_is_missing",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_explicit_null_bare_body",
+        "tests/test_tutorial/test_bigger_applications/test_main.py::test_put_no_header",
+        "tests/test_sse.py::test_default_response_class_on_app_openapi_schema",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+        "tests/test_path.py::test_path_param_gt0_0",
+        "tests/test_request_params/test_body/test_optional_list.py::test_optional_list_str_schema",
+        "tests/test_path.py::test_path_param_lt_gt_int_0",
+        "tests/test_path.py::test_path_param_lt_gt_0",
+        "tests/test_router_include_context.py::test_effective_body_fields_from_app_router_include_and_route_match_openapi",
+        "tests/test_sse.py::test_default_response_class_on_parent_router_openapi_schema",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+        "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_request",
+        "tests/test_exception_handlers.py::test_override_request_validation_exception"
+      ]
+    },
+    "R2": {
+      "per_ac": {
+        "R2.AC1": [
+          {
+            "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+            "rrf": 0.032787,
+            "bm25_rank": 1,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_dependency_cache.py::test_security_cache",
+            "rrf": 0.031754,
+            "bm25_rank": 4,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_callable_classification_cache_supports_large_apps",
+            "rrf": 0.029412,
+            "bm25_rank": 8,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_request_scope",
+            "rrf": 0.027402,
+            "bm25_rank": 14,
+            "vector_rank": 12
+          },
+          {
+            "test_id": "tests/test_dependency_cache.py::test_sub_counter",
+            "rrf": 0.016129,
+            "bm25_rank": 2,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_callable_classification_is_shared_by_call",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_explicit_and_generator_scopes",
+            "rrf": 0.015873,
+            "bm25_rank": 3,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_router_include_context.py::test_included_router_candidate_cache_is_thread_safe",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_dependency_partial.py::test_dependency_types_with_partial",
+            "rrf": 0.015385,
+            "bm25_rank": null,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_explicit_null_does_not_call_default_factory",
+            "rrf": 0.015385,
+            "bm25_rank": 5,
+            "vector_rank": null
+          }
+        ],
+        "R2.AC2": [
+          {
+            "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+            "rrf": 0.032787,
+            "bm25_rank": 1,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_dependency_cache.py::test_sub_counter",
+            "rrf": 0.032258,
+            "bm25_rank": 2,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+            "rrf": 0.03009,
+            "bm25_rank": 8,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_q_foo",
+            "rrf": 0.028694,
+            "bm25_rank": 18,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends",
+            "rrf": 0.028259,
+            "bm25_rank": 15,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_q_foo",
+            "rrf": 0.025645,
+            "bm25_rank": 19,
+            "vector_rank": 17
+          },
+          {
+            "test_id": "tests/test_dependency_cache.py::test_security_cache",
+            "rrf": 0.015873,
+            "bm25_rank": 3,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_dependency_cache.py::test_normal_counter",
+            "rrf": 0.015625,
+            "bm25_rank": 4,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_serialize_response_model.py::test_coerce",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_explicit_and_generator_scopes",
+            "rrf": 0.015385,
+            "bm25_rank": 5,
+            "vector_rank": null
+          }
+        ],
+        "R2.AC3": [
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+            "rrf": 0.031319,
+            "bm25_rank": 1,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends_k_bar",
+            "rrf": 0.030331,
+            "bm25_rank": 4,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_k_bar",
+            "rrf": 0.030214,
+            "bm25_rank": 2,
+            "vector_rank": 11
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_main_depends",
+            "rrf": 0.029437,
+            "bm25_rank": 6,
+            "vector_rank": 10
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_depends",
+            "rrf": 0.029274,
+            "bm25_rank": 5,
+            "vector_rank": 12
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_main_depends_k_bar",
+            "rrf": 0.02886,
+            "bm25_rank": 3,
+            "vector_rank": 17
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends",
+            "rrf": 0.028624,
+            "bm25_rank": 7,
+            "vector_rank": 13
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends",
+            "rrf": 0.028006,
+            "bm25_rank": 9,
+            "vector_rank": 14
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub__main_depends_q_foo",
+            "rrf": 0.027619,
+            "bm25_rank": 10,
+            "vector_rank": 15
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_q_foo",
+            "rrf": 0.026905,
+            "bm25_rank": 11,
+            "vector_rank": 18
+          }
+        ],
+        "R2.AC4": [
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+            "rrf": 0.032522,
+            "bm25_rank": 2,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+            "rrf": 0.032522,
+            "bm25_rank": 1,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_function",
+            "rrf": 0.030366,
+            "bm25_rank": 3,
+            "vector_rank": 9
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_derived_values_follow_dependency_state",
+            "rrf": 0.029857,
+            "bm25_rank": 6,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_derived_values_are_not_stored_on_dependant",
+            "rrf": 0.02967,
+            "bm25_rank": 5,
+            "vector_rank": 10
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_explicit_and_generator_scopes",
+            "rrf": 0.028595,
+            "bm25_rank": 8,
+            "vector_rank": 12
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_decorator_depends_q_foo",
+            "rrf": 0.028006,
+            "bm25_rank": 9,
+            "vector_rank": 14
+          },
+          {
+            "test_id": "tests/test_dependency_overrides.py::test_main_depends_q_foo",
+            "rrf": 0.025808,
+            "bm25_rank": 17,
+            "vector_rank": 18
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_broken_scope",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_class.py::test_class_dependency",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          }
+        ]
+      },
+      "pool": [
+        "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+        "tests/test_dependency_models.py::test_explicit_and_generator_scopes",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_q_foo",
+        "tests/test_dependency_cache.py::test_sub_counter",
+        "tests/test_dependency_cache.py::test_security_cache",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+        "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+        "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_function",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_k_bar",
+        "tests/test_dependency_models.py::test_derived_values_follow_dependency_state",
+        "tests/test_dependency_models.py::test_derived_values_are_not_stored_on_dependant",
+        "tests/test_dependency_overrides.py::test_override_with_sub_main_depends",
+        "tests/test_dependency_models.py::test_callable_classification_cache_supports_large_apps",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub_main_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_q_foo",
+        "tests/test_dependency_overrides.py::test_decorator_depends_q_foo",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub__main_depends_q_foo",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_dependency_overrides.py::test_main_depends_q_foo",
+        "tests/test_dependency_models.py::test_callable_classification_is_shared_by_call"
+      ]
+    },
+    "R3": {
+      "per_ac": {
+        "R3.AC1": [
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic",
+            "rrf": 0.032018,
+            "bm25_rank": 1,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic",
+            "rrf": 0.031514,
+            "bm25_rank": 2,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+            "rrf": 0.031025,
+            "bm25_rank": 3,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.030835,
+            "bm25_rank": 8,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.030366,
+            "bm25_rank": 9,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+            "rrf": 0.029551,
+            "bm25_rank": 16,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.029211,
+            "bm25_rank": 7,
+            "vector_rank": 10
+          },
+          {
+            "test_id": "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_token_jessica",
+            "rrf": 0.028958,
+            "bm25_rank": 4,
+            "vector_rank": 15
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials",
+            "rrf": 0.028595,
+            "bm25_rank": 12,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_foo_token_jessica",
+            "rrf": 0.028205,
+            "bm25_rank": 5,
+            "vector_rank": 18
+          }
+        ],
+        "R3.AC2": [
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+            "rrf": 0.032522,
+            "bm25_rank": 1,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_security_http_base_optional.py::test_security_http_base_no_credentials",
+            "rrf": 0.032266,
+            "bm25_rank": 3,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.030798,
+            "bm25_rank": 7,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.030536,
+            "bm25_rank": 6,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.030331,
+            "bm25_rank": 8,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_security_http_base_optional.py::test_security_http_base_with_ws_no_credentials",
+            "rrf": 0.029116,
+            "bm25_rank": 2,
+            "vector_rank": 17
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic_invalid_credentials",
+            "rrf": 0.02879,
+            "bm25_rank": 11,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials",
+            "rrf": 0.028439,
+            "bm25_rank": 14,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_no_credentials",
+            "rrf": 0.028382,
+            "bm25_rank": 12,
+            "vector_rank": 9
+          },
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+            "rrf": 0.02837,
+            "bm25_rank": 10,
+            "vector_rank": 11
+          }
+        ],
+        "R3.AC3": [
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.032522,
+            "bm25_rank": 1,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+            "rrf": 0.032018,
+            "bm25_rank": 4,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.031281,
+            "bm25_rank": 2,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials",
+            "rrf": 0.031258,
+            "bm25_rank": 3,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic_invalid_credentials",
+            "rrf": 0.031025,
+            "bm25_rank": 6,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials",
+            "rrf": 0.03101,
+            "bm25_rank": 5,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_security_http_base.py::test_security_http_base_no_credentials",
+            "rrf": 0.029418,
+            "bm25_rank": 9,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic_no_credentials",
+            "rrf": 0.029418,
+            "bm25_rank": 7,
+            "vector_rank": 9
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic_no_credentials",
+            "rrf": 0.029412,
+            "bm25_rank": 8,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_dependency_paramless.py::test_parameterless_without_scopes",
+            "rrf": 0.028571,
+            "bm25_rank": 10,
+            "vector_rank": 10
+          }
+        ],
+        "R3.AC4": [
+          {
+            "test_id": "tests/test_security_http_base_optional.py::test_security_http_base_with_ws",
+            "rrf": 0.032266,
+            "bm25_rank": 3,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_router_include_context.py::test_get_openapi_accepts_webhook_route_contexts",
+            "rrf": 0.032258,
+            "bm25_rank": 2,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+            "rrf": 0.032018,
+            "bm25_rank": 1,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_security_http_base.py::test_security_http_base",
+            "rrf": 0.029274,
+            "bm25_rank": 5,
+            "vector_rank": 12
+          },
+          {
+            "test_id": "tests/test_security_http_base_optional.py::test_security_http_base",
+            "rrf": 0.02885,
+            "bm25_rank": 6,
+            "vector_rank": 13
+          },
+          {
+            "test_id": "tests/test_security_http_base.py::test_security_http_base_with_whitespaces",
+            "rrf": 0.027584,
+            "bm25_rank": 7,
+            "vector_rank": 19
+          },
+          {
+            "test_id": "tests/test_response_model_sub_types.py::test_openapi_schema",
+            "rrf": 0.025487,
+            "bm25_rank": 17,
+            "vector_rank": 20
+          },
+          {
+            "test_id": "tests/test_security_http_base_optional.py::test_security_http_base_with_ws_no_credentials",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_security_scheme_helpers",
+            "rrf": 0.015625,
+            "bm25_rank": 4,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic_no_credentials",
+            "rrf": 0.015385,
+            "bm25_rank": null,
+            "vector_rank": 5
+          }
+        ]
+      },
+      "pool": [
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_with_ws_no_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_with_ws",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_webhook_route_contexts",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+        "tests/test_security_http_base.py::test_security_http_base_no_credentials",
+        "tests/test_security_http_base.py::test_security_http_base",
+        "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_token_jessica",
+        "tests/test_security_http_base_optional.py::test_security_http_base",
+        "tests/test_dependency_paramless.py::test_parameterless_without_scopes",
+        "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_foo_token_jessica",
+        "tests/test_security_http_base.py::test_security_http_base_with_whitespaces",
+        "tests/test_response_model_sub_types.py::test_openapi_schema"
+      ]
+    },
+    "R4": {
+      "per_ac": {
+        "R4.AC1": [
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_http_exception",
+            "rrf": 0.032522,
+            "bm25_rank": 2,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_starlette_exception.py::test_no_body_status_code_exception_handlers",
+            "rrf": 0.032018,
+            "bm25_rank": 1,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+            "rrf": 0.031281,
+            "bm25_rank": 6,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_starlette_exception.py::test_no_body_status_code_with_detail_exception_handlers",
+            "rrf": 0.030798,
+            "bm25_rank": 3,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_request_validation_exception",
+            "rrf": 0.030077,
+            "bm25_rank": 7,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_custom_middleware_exception.py::test_custom_middleware_exception_not_raised",
+            "rrf": 0.029911,
+            "bm25_rank": 4,
+            "vector_rank": 10
+          },
+          {
+            "test_id": "tests/test_telemetry/test_http.py::test_custom_error_handler_sees_span",
+            "rrf": 0.029572,
+            "bm25_rank": 13,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_custom_middleware_exception.py::test_custom_middleware_exception",
+            "rrf": 0.029274,
+            "bm25_rank": 5,
+            "vector_rank": 12
+          },
+          {
+            "test_id": "tests/test_telemetry/test_http.py::test_http_statuses",
+            "rrf": 0.015385,
+            "bm25_rank": null,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_security_http_base_optional.py::test_security_http_base",
+            "rrf": 0.014706,
+            "bm25_rank": null,
+            "vector_rank": 8
+          }
+        ],
+        "R4.AC2": [
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_request_validation_exception",
+            "rrf": 0.032787,
+            "bm25_rank": 1,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_request_scope",
+            "rrf": 0.031754,
+            "bm25_rank": 4,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+            "rrf": 0.028309,
+            "bm25_rank": 6,
+            "vector_rank": 16
+          },
+          {
+            "test_id": "tests/test_dependency_models.py::test_derived_values_follow_dependency_state",
+            "rrf": 0.016129,
+            "bm25_rank": 2,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_query.py::test_query_optional",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_telemetry/test_http.py::test_custom_error_handler_sees_span",
+            "rrf": 0.015873,
+            "bm25_rank": 3,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_query.py::test_query_int_query_42",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_request",
+            "rrf": 0.015385,
+            "bm25_rank": 5,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_with_no_token",
+            "rrf": 0.015385,
+            "bm25_rank": null,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_query.py::test_query_int_optional",
+            "rrf": 0.015152,
+            "bm25_rank": null,
+            "vector_rank": 6
+          }
+        ],
+        "R4.AC3": [
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+            "rrf": 0.032787,
+            "bm25_rank": 1,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_async_raise_server_error",
+            "rrf": 0.032002,
+            "bm25_rank": 2,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_raise_server_error",
+            "rrf": 0.032002,
+            "bm25_rank": 3,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_async_raise_server_error",
+            "rrf": 0.03101,
+            "bm25_rank": 5,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_sync_raise_server_error",
+            "rrf": 0.03101,
+            "bm25_rank": 4,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_server_error_exception_raises",
+            "rrf": 0.030077,
+            "bm25_rank": 6,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_telemetry/test_http.py::test_middleware_response_or_error",
+            "rrf": 0.030077,
+            "bm25_rank": 7,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_telemetry/test_http.py::test_http_statuses",
+            "rrf": 0.028992,
+            "bm25_rank": 8,
+            "vector_rank": 10
+          },
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_http_exception",
+            "rrf": 0.028219,
+            "bm25_rank": 14,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_exception_handlers.py::test_override_request_validation_exception",
+            "rrf": 0.025645,
+            "bm25_rank": 19,
+            "vector_rank": 17
+          }
+        ],
+        "R4.AC4": [
+          {
+            "test_id": "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+            "rrf": 0.032787,
+            "bm25_rank": 1,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_raise_raises",
+            "rrf": 0.031281,
+            "bm25_rank": 6,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_sync_raise_raises",
+            "rrf": 0.030798,
+            "bm25_rank": 7,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_async_raise_raises",
+            "rrf": 0.030331,
+            "bm25_rank": 8,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_async_raise_raises",
+            "rrf": 0.02967,
+            "bm25_rank": 5,
+            "vector_rank": 10
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_sync_raise_other",
+            "rrf": 0.02904,
+            "bm25_rank": 12,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_raise_other",
+            "rrf": 0.02901,
+            "bm25_rank": 11,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_async_raise_other",
+            "rrf": 0.027799,
+            "bm25_rank": 10,
+            "vector_rank": 14
+          },
+          {
+            "test_id": "tests/test_dependency_contextmanager.py::test_sync_async_raise_other",
+            "rrf": 0.027783,
+            "bm25_rank": 13,
+            "vector_rank": 11
+          },
+          {
+            "test_id": "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+            "rrf": 0.026316,
+            "bm25_rank": 16,
+            "vector_rank": 16
+          }
+        ]
+      },
+      "pool": [
+        "tests/test_exception_handlers.py::test_override_request_validation_exception",
+        "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+        "tests/test_exception_handlers.py::test_override_http_exception",
+        "tests/test_telemetry/test_http.py::test_custom_error_handler_sees_span",
+        "tests/test_telemetry/test_http.py::test_http_statuses",
+        "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+        "tests/test_starlette_exception.py::test_no_body_status_code_exception_handlers",
+        "tests/test_dependency_contextmanager.py::test_async_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_server_error",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_raises",
+        "tests/test_dependency_contextmanager.py::test_sync_async_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_raises",
+        "tests/test_starlette_exception.py::test_no_body_status_code_with_detail_exception_handlers",
+        "tests/test_dependency_contextmanager.py::test_sync_async_raise_raises",
+        "tests/test_exception_handlers.py::test_override_server_error_exception_raises",
+        "tests/test_telemetry/test_http.py::test_middleware_response_or_error",
+        "tests/test_custom_middleware_exception.py::test_custom_middleware_exception_not_raised",
+        "tests/test_dependency_contextmanager.py::test_async_raise_raises",
+        "tests/test_custom_middleware_exception.py::test_custom_middleware_exception",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_other",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_other",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+        "tests/test_dependency_contextmanager.py::test_async_raise_other"
+      ]
+    },
+    "R5": {
+      "per_ac": {
+        "R5.AC1": [
+          {
+            "test_id": "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+            "rrf": 0.032787,
+            "bm25_rank": 1,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+            "rrf": 0.032258,
+            "bm25_rank": 2,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field",
+            "rrf": 0.028898,
+            "bm25_rank": 14,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_submodel_with_extra_data",
+            "rrf": 0.02781,
+            "bm25_rank": 19,
+            "vector_rank": 6
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm.py::test_security_http_basic",
+            "rrf": 0.027693,
+            "bm25_rank": 8,
+            "vector_rank": 17
+          },
+          {
+            "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic",
+            "rrf": 0.027651,
+            "bm25_rank": 9,
+            "vector_rank": 16
+          },
+          {
+            "test_id": "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+            "rrf": 0.027619,
+            "bm25_rank": 10,
+            "vector_rank": 15
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+            "rrf": 0.015873,
+            "bm25_rank": 3,
+            "vector_rank": null
+          },
+          {
+            "test_id": "tests/test_union_form_normalization.py::test_missing_fields_use_model_defaults",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_none_annotation_return_submodel_with_extra_data",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          }
+        ],
+        "R5.AC2": [
+          {
+            "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_list_of_models",
+            "rrf": 0.032018,
+            "bm25_rank": 1,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+            "rrf": 0.031778,
+            "bm25_rank": 5,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter.py::test_list_of_models",
+            "rrf": 0.031514,
+            "bm25_rank": 2,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+            "rrf": 0.031281,
+            "bm25_rank": 6,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+            "rrf": 0.030579,
+            "bm25_rank": 3,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+            "rrf": 0.030118,
+            "bm25_rank": 4,
+            "vector_rank": 9
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_same_model",
+            "rrf": 0.027864,
+            "bm25_rank": 8,
+            "vector_rank": 16
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field",
+            "rrf": 0.026993,
+            "bm25_rank": 9,
+            "vector_rank": 20
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_submodel_with_extra_data",
+            "rrf": 0.026905,
+            "bm25_rank": 18,
+            "vector_rank": 11
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_model1_annotation_model2_return_submodel_with_extra_data",
+            "rrf": 0.015873,
+            "bm25_rank": null,
+            "vector_rank": 3
+          }
+        ],
+        "R5.AC3": [
+          {
+            "test_id": "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+            "rrf": 0.030331,
+            "bm25_rank": 8,
+            "vector_rank": 4
+          },
+          {
+            "test_id": "tests/test_serialize_response_model.py::test_coerce_exclude_unset",
+            "rrf": 0.030214,
+            "bm25_rank": 2,
+            "vector_rank": 11
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+            "rrf": 0.029877,
+            "bm25_rank": 9,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_serialize_response_model.py::test_valid_exclude_unset",
+            "rrf": 0.029762,
+            "bm25_rank": 3,
+            "vector_rank": 12
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_filtering_model_annotation_submodel_return_submodel",
+            "rrf": 0.029643,
+            "bm25_rank": 14,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_response_model_include_exclude.py::test_nested_exclude_simple",
+            "rrf": 0.029551,
+            "bm25_rank": 16,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_response_model_include_exclude.py::test_nested_exclude_simple_dict",
+            "rrf": 0.02886,
+            "bm25_rank": 17,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+            "rrf": 0.028814,
+            "bm25_rank": 12,
+            "vector_rank": 7
+          },
+          {
+            "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+            "rrf": 0.028405,
+            "bm25_rank": 13,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_jsonable_encoder.py::test_encode_dict_include_exclude_list",
+            "rrf": 0.016393,
+            "bm25_rank": 1,
+            "vector_rank": null
+          }
+        ],
+        "R5.AC4": [
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_model",
+            "rrf": 0.031258,
+            "bm25_rank": 3,
+            "vector_rank": 5
+          },
+          {
+            "test_id": "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+            "rrf": 0.030886,
+            "bm25_rank": 1,
+            "vector_rank": 9
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_dict",
+            "rrf": 0.030835,
+            "bm25_rank": 2,
+            "vector_rank": 8
+          },
+          {
+            "test_id": "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_additional_responses_model",
+            "rrf": 0.030798,
+            "bm25_rank": 7,
+            "vector_rank": 3
+          },
+          {
+            "test_id": "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_response_model",
+            "rrf": 0.02885,
+            "bm25_rank": 6,
+            "vector_rank": 13
+          },
+          {
+            "test_id": "tests/test_response_model_invalid.py::test_invalid_response_model_sub_type_raises",
+            "rrf": 0.028125,
+            "bm25_rank": 4,
+            "vector_rank": 20
+          },
+          {
+            "test_id": "tests/test_response_model_invalid.py::test_invalid_response_model_in_responses_raises",
+            "rrf": 0.026709,
+            "bm25_rank": 18,
+            "vector_rank": 12
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_model1_annotation_model2_return_invalid_model",
+            "rrf": 0.016393,
+            "bm25_rank": null,
+            "vector_rank": 1
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_response_model_model1_annotation_model2_return_invalid_dict",
+            "rrf": 0.016129,
+            "bm25_rank": null,
+            "vector_rank": 2
+          },
+          {
+            "test_id": "tests/test_response_model_as_return_annotation.py::test_no_response_model_annotation_return_invalid_model",
+            "rrf": 0.015625,
+            "bm25_rank": null,
+            "vector_rank": 4
+          }
+        ]
+      },
+      "pool": [
+        "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+        "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+        "tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_submodel_with_extra_data",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_list_of_models",
+        "tests/test_response_model_data_filter.py::test_list_of_models",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_model",
+        "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_dict",
+        "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_additional_responses_model",
+        "tests/test_serialize_response_model.py::test_coerce_exclude_unset",
+        "tests/test_serialize_response_model.py::test_valid_exclude_unset",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_filtering_model_annotation_submodel_return_submodel",
+        "tests/test_response_model_include_exclude.py::test_nested_exclude_simple",
+        "tests/test_response_model_include_exclude.py::test_nested_exclude_simple_dict",
+        "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_response_model",
+        "tests/test_response_model_invalid.py::test_invalid_response_model_sub_type_raises",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_same_model",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+        "tests/test_response_model_invalid.py::test_invalid_response_model_in_responses_raises",
+        "tests/test_jsonable_encoder.py::test_encode_dict_include_exclude_list"
+      ]
+    }
+  }
+}

@@ -1,0 +1,488 @@
+{
+  "provider": "offline",
+  "model": null,
+  "results": [
+    {
+      "requirement_id": "R1",
+      "acs": [
+        {
+          "ac_id": "R1.AC1",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_router_include_context.py::test_effective_body_fields_from_app_router_include_and_route_match_openapi",
+              "file": "tests/test_router_include_context.py",
+              "line_start": 652,
+              "line_end": 652,
+              "quote": "assert response.status_code == 200"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_effective_body_fields_from_app_router_include_and_route_match_openapi"
+        },
+        {
+          "ac_id": "R1.AC2",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+              "file": "tests/test_body_alias_choices.py",
+              "line_start": 139,
+              "line_end": 142,
+              "quote": "assert [(error[\"type\"], error[\"loc\"]) for error in response.json()[\"detail\"]] == [\n        (\"missing\", [\"body\", \"items\"]),\n        (\"missing\", [\"body\", \"first\"]),\n    ]"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_embedded_body_requires_an_object"
+        },
+        {
+          "ac_id": "R1.AC3",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+              "file": "tests/test_multi_body_errors.py",
+              "line_start": 43,
+              "line_end": 53,
+              "quote": "assert response.json() == {\n        \"detail\": [\n            {\n                \"type\": \"greater_than\",\n                \"loc\": [\"body\", 0, \"age\"],\n                \"msg\": \"Input should be greater than 0\",\n                \"input\": -1.0,\n                \"ctx\": {\"gt\": 0},\n            }\n        ]\n    }"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_jsonable_encoder_requiring_error"
+        },
+        {
+          "ac_id": "R1.AC4",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+              "file": "tests/test_request_params/test_body/test_list.py",
+              "line_start": 39,
+              "line_end": 50,
+              "quote": "assert app.openapi()[\"components\"][\"schemas\"][body_model_name] == {\n        \"properties\": {\n            \"p\": {\n                \"items\": {\"type\": \"string\"},\n                \"title\": \"P\",\n                \"type\": \"array\",\n            },\n        },\n        \"required\": [\"p\"],\n        \"title\": body_model_"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_required_list_str_schema"
+        }
+      ],
+      "gaps": [],
+      "pool": [
+        "tests/test_union_form_normalization.py::test_discriminator_errors_are_preserved",
+        "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+        "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+        "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+        "tests/test_union_form_normalization.py::test_empty_scalar_is_missing",
+        "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+        "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_absent_body_for_required_argument",
+        "tests/test_union_form_normalization.py::test_omitted_list_is_missing",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_webhook_route_contexts",
+        "tests/test_starlette_exception.py::test_openapi_schema",
+        "tests/test_union_form_normalization.py::test_empty_multipart_scalar_is_missing",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_request_params/test_body/test_nullable_and_defaults.py::test_explicit_null_bare_body",
+        "tests/test_tutorial/test_bigger_applications/test_main.py::test_put_no_header",
+        "tests/test_sse.py::test_default_response_class_on_app_openapi_schema",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+        "tests/test_path.py::test_path_param_gt0_0",
+        "tests/test_request_params/test_body/test_optional_list.py::test_optional_list_str_schema",
+        "tests/test_path.py::test_path_param_lt_gt_int_0",
+        "tests/test_path.py::test_path_param_lt_gt_0",
+        "tests/test_router_include_context.py::test_effective_body_fields_from_app_router_include_and_route_match_openapi",
+        "tests/test_sse.py::test_default_response_class_on_parent_router_openapi_schema",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+        "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_request",
+        "tests/test_exception_handlers.py::test_override_request_validation_exception"
+      ],
+      "provider": "offline",
+      "model": null,
+      "verified": true
+    },
+    {
+      "requirement_id": "R2",
+      "acs": [
+        {
+          "ac_id": "R2.AC1",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_cache.py::test_sub_counter",
+              "file": "tests/test_dependency_cache.py",
+              "line_start": 68,
+              "line_end": 68,
+              "quote": "assert response.json() == {\"counter\": 1, \"subcounter\": 1}"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_sub_counter"
+        },
+        {
+          "ac_id": "R2.AC2",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+              "file": "tests/test_dependency_cache.py",
+              "line_start": 78,
+              "line_end": 78,
+              "quote": "assert response.json() == {\"counter\": 2, \"subcounter\": 1}"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_sub_counter_no_cache"
+        },
+        {
+          "ac_id": "R2.AC3",
+          "status": "covered",
+          "confidence": 0.73,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+              "file": "tests/test_dependency_overrides.py",
+              "line_start": 299,
+              "line_end": 299,
+              "quote": "assert response.status_code == 200"
+            }
+          ],
+          "reasoning": "matched 2/3 keywords via test_override_with_sub_decorator_depends_k_bar; missing ['dependency_overrides']"
+        },
+        {
+          "ac_id": "R2.AC4",
+          "status": "partial",
+          "confidence": 0.53,
+          "evidence": [
+            {
+              "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+              "file": "tests/test_dependency_yield_scope.py",
+              "line_start": 232,
+              "line_end": 232,
+              "quote": "assert response.json() == {\"detail\": \"Exception after yield\"}"
+            }
+          ],
+          "reasoning": "matched 1/2 keywords via test_app_level_dep_scope_function; missing ['contextmanager']"
+        }
+      ],
+      "gaps": [
+        "R2.AC4: matched 1/2 keywords via test_app_level_dep_scope_function; missing ['contextmanager']"
+      ],
+      "pool": [
+        "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+        "tests/test_dependency_models.py::test_explicit_and_generator_scopes",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_q_foo",
+        "tests/test_dependency_cache.py::test_sub_counter",
+        "tests/test_dependency_cache.py::test_security_cache",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+        "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+        "tests/test_dependency_yield_scope.py::test_router_level_dep_scope_function",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends_k_bar",
+        "tests/test_dependency_models.py::test_derived_values_follow_dependency_state",
+        "tests/test_dependency_models.py::test_derived_values_are_not_stored_on_dependant",
+        "tests/test_dependency_overrides.py::test_override_with_sub_main_depends",
+        "tests/test_dependency_models.py::test_callable_classification_cache_supports_large_apps",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub_main_depends_k_bar",
+        "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_q_foo",
+        "tests/test_dependency_overrides.py::test_decorator_depends_q_foo",
+        "tests/test_dependency_overrides.py::test_override_with_sub_router_decorator_depends",
+        "tests/test_dependency_overrides.py::test_override_with_sub__main_depends_q_foo",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_dependency_overrides.py::test_main_depends_q_foo",
+        "tests/test_dependency_models.py::test_callable_classification_is_shared_by_call"
+      ],
+      "provider": "offline",
+      "model": null,
+      "verified": true
+    },
+    {
+      "requirement_id": "R3",
+      "acs": [
+        {
+          "ac_id": "R3.AC1",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic",
+              "file": "tests/test_security_http_basic_optional.py",
+              "line_start": 26,
+              "line_end": 26,
+              "quote": "assert response.json() == {\"username\": \"john\", \"password\": \"secret\"}"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_security_http_basic"
+        },
+        {
+          "ac_id": "R3.AC2",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_security_http_base_optional.py::test_security_http_base_no_credentials",
+              "file": "tests/test_security_http_base_optional.py",
+              "line_start": 44,
+              "line_end": 44,
+              "quote": "assert response.status_code == 200, response.text"
+            }
+          ],
+          "reasoning": "matched 2/2 keywords via test_security_http_base_no_credentials"
+        },
+        {
+          "ac_id": "R3.AC3",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_security_http_base.py::test_security_http_base_no_credentials",
+              "file": "tests/test_security_http_base.py",
+              "line_start": 33,
+              "line_end": 33,
+              "quote": "assert response.status_code == 401, response.text"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_security_http_base_no_credentials"
+        },
+        {
+          "ac_id": "R3.AC4",
+          "status": "covered",
+          "confidence": 0.73,
+          "evidence": [
+            {
+              "test_id": "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+              "file": "tests/test_router_include_context.py",
+              "line_start": 178,
+              "line_end": 178,
+              "quote": "assert \"HTTPBearer\" in schema[\"components\"][\"securitySchemes\"]"
+            }
+          ],
+          "reasoning": "matched 2/3 keywords via test_get_openapi_accepts_filtered_route_contexts_with_effective_paths; missing ['HTTPBasic']"
+        }
+      ],
+      "gaps": [],
+      "pool": [
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_invalid_credentials",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_with_ws_no_credentials",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_no_credentials",
+        "tests/test_security_http_base_optional.py::test_security_http_base_with_ws",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_webhook_route_contexts",
+        "tests/test_router_include_context.py::test_get_openapi_accepts_filtered_route_contexts_with_effective_paths",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+        "tests/test_security_http_base.py::test_security_http_base_no_credentials",
+        "tests/test_security_http_base.py::test_security_http_base",
+        "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_token_jessica",
+        "tests/test_security_http_base_optional.py::test_security_http_base",
+        "tests/test_dependency_paramless.py::test_parameterless_without_scopes",
+        "tests/test_tutorial/test_bigger_applications/test_main.py::test_users_foo_token_jessica",
+        "tests/test_security_http_base.py::test_security_http_base_with_whitespaces",
+        "tests/test_response_model_sub_types.py::test_openapi_schema"
+      ],
+      "provider": "offline",
+      "model": null,
+      "verified": true
+    },
+    {
+      "requirement_id": "R4",
+      "acs": [
+        {
+          "ac_id": "R4.AC1",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_override_http_exception",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 61,
+              "line_end": 61,
+              "quote": "assert response.json() == {\"exception\": \"http-exception\"}"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_override_http_exception"
+        },
+        {
+          "ac_id": "R4.AC2",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_override_request_validation_exception",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 66,
+              "line_end": 66,
+              "quote": "assert response.status_code == 200"
+            }
+          ],
+          "reasoning": "matched 2/2 keywords via test_override_request_validation_exception"
+        },
+        {
+          "ac_id": "R4.AC3",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 78,
+              "line_end": 78,
+              "quote": "assert response.status_code == 500"
+            }
+          ],
+          "reasoning": "matched 2/2 keywords via test_override_server_error_exception_response"
+        },
+        {
+          "ac_id": "R4.AC4",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+              "file": "tests/test_exception_handlers.py",
+              "line_start": 84,
+              "line_end": 85,
+              "quote": "with pytest.raises(ValueError) as exc_info:\n        client.get(\"/dependency-with-yield\")"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_traceback_for_dependency_with_yield"
+        }
+      ],
+      "gaps": [],
+      "pool": [
+        "tests/test_exception_handlers.py::test_override_request_validation_exception",
+        "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+        "tests/test_exception_handlers.py::test_override_http_exception",
+        "tests/test_telemetry/test_http.py::test_custom_error_handler_sees_span",
+        "tests/test_telemetry/test_http.py::test_http_statuses",
+        "tests/test_exception_handlers.py::test_traceback_for_dependency_with_yield",
+        "tests/test_starlette_exception.py::test_no_body_status_code_exception_handlers",
+        "tests/test_dependency_contextmanager.py::test_async_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_server_error",
+        "tests/test_dependency_yield_scope.py::test_request_scope",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_raises",
+        "tests/test_dependency_contextmanager.py::test_sync_async_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_server_error",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_raises",
+        "tests/test_starlette_exception.py::test_no_body_status_code_with_detail_exception_handlers",
+        "tests/test_dependency_contextmanager.py::test_sync_async_raise_raises",
+        "tests/test_exception_handlers.py::test_override_server_error_exception_raises",
+        "tests/test_telemetry/test_http.py::test_middleware_response_or_error",
+        "tests/test_custom_middleware_exception.py::test_custom_middleware_exception_not_raised",
+        "tests/test_dependency_contextmanager.py::test_async_raise_raises",
+        "tests/test_custom_middleware_exception.py::test_custom_middleware_exception",
+        "tests/test_dependency_contextmanager.py::test_sync_sync_raise_other",
+        "tests/test_dependency_contextmanager.py::test_sync_raise_other",
+        "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_request",
+        "tests/test_dependency_contextmanager.py::test_async_raise_other"
+      ],
+      "provider": "offline",
+      "model": null,
+      "verified": true
+    },
+    {
+      "requirement_id": "R5",
+      "acs": [
+        {
+          "ac_id": "R5.AC1",
+          "status": "covered",
+          "confidence": 0.73,
+          "evidence": [
+            {
+              "test_id": "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+              "file": "tests/test_response_model_data_filter.py",
+              "line_start": 68,
+              "line_end": 71,
+              "quote": "assert response.json() == {\n        \"name\": \"Nibbler\",\n        \"owner\": {\"email\": \"johndoe@example.com\"},\n    }"
+            }
+          ],
+          "reasoning": "matched 2/3 keywords via test_filter_second_level_model; missing ['password']"
+        },
+        {
+          "ac_id": "R5.AC2",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+              "file": "tests/test_response_model_data_filter.py",
+              "line_start": 68,
+              "line_end": 71,
+              "quote": "assert response.json() == {\n        \"name\": \"Nibbler\",\n        \"owner\": {\"email\": \"johndoe@example.com\"},\n    }"
+            }
+          ],
+          "reasoning": "matched 3/3 keywords via test_filter_second_level_model"
+        },
+        {
+          "ac_id": "R5.AC3",
+          "status": "covered",
+          "confidence": 0.73,
+          "evidence": [
+            {
+              "test_id": "tests/test_jsonable_encoder.py::test_encode_dict_include_exclude_list",
+              "file": "tests/test_jsonable_encoder.py",
+              "line_start": 90,
+              "line_end": 90,
+              "quote": "assert jsonable_encoder(pet, include=[\"name\"]) == {\"name\": \"Firulais\"}"
+            }
+          ],
+          "reasoning": "matched 2/3 keywords via test_encode_dict_include_exclude_list; missing ['response.json()']"
+        },
+        {
+          "ac_id": "R5.AC4",
+          "status": "covered",
+          "confidence": 0.8,
+          "evidence": [
+            {
+              "test_id": "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_additional_responses_model",
+              "file": "tests/test_pydantic_v1_error.py",
+              "line_start": 64,
+              "line_end": 70,
+              "quote": "with pytest.raises(PydanticV1NotSupportedError):\n\n        @app.get(\n            \"/responses\", response_model=None, responses={400: {\"model\": ErrorModelV1}}\n        )\n        def endpoint():  # pragma: no cover\n            return {\"ok\": True}"
+            }
+          ],
+          "reasoning": "matched 2/2 keywords via test_raises_pydantic_v1_model_in_additional_responses_model"
+        }
+      ],
+      "gaps": [],
+      "pool": [
+        "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+        "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+        "tests/test_response_model_as_return_annotation.py::test_invalid_response_model_field",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_submodel_with_extra_data",
+        "tests/test_response_model_data_filter_no_inheritance.py::test_list_of_models",
+        "tests/test_response_model_data_filter.py::test_list_of_models",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_model",
+        "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_invalid_dict",
+        "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_additional_responses_model",
+        "tests/test_serialize_response_model.py::test_coerce_exclude_unset",
+        "tests/test_serialize_response_model.py::test_valid_exclude_unset",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_filtering_model_annotation_submodel_return_submodel",
+        "tests/test_response_model_include_exclude.py::test_nested_exclude_simple",
+        "tests/test_response_model_include_exclude.py::test_nested_exclude_simple_dict",
+        "tests/test_pydantic_v1_error.py::test_raises_pydantic_v1_model_in_response_model",
+        "tests/test_response_model_invalid.py::test_invalid_response_model_sub_type_raises",
+        "tests/test_response_model_as_return_annotation.py::test_response_model_no_annotation_return_same_model",
+        "tests/test_security_http_basic_realm.py::test_security_http_basic",
+        "tests/test_security_http_basic_optional.py::test_security_http_basic",
+        "tests/test_security_http_basic_realm_description.py::test_security_http_basic",
+        "tests/test_response_model_invalid.py::test_invalid_response_model_in_responses_raises",
+        "tests/test_jsonable_encoder.py::test_encode_dict_include_exclude_list"
+      ],
+      "provider": "offline",
+      "model": null,
+      "verified": true
+    }
+  ]
+}

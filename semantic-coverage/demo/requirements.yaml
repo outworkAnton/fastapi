@@ -1,0 +1,226 @@
+schema_version: 1
+language: ru
+# Analyst-authored English terms are mandatory: tests are written in English,
+# requirements in Russian. The English text is the explicit cross-lingual bridge.
+requirements:
+  - id: R1
+    title: "Валидация тела запроса по Pydantic-модели"
+    weight: 3
+    gherkin: |
+      Feature: Request body validation
+        Scenario: Valid body
+          Given app with POST /items and Pydantic model Item
+          When client sends a valid JSON body
+          Then response is 200 and echoes the payload
+        Scenario: Missing required field
+          Given app with a model that requires field "p"
+          When client sends {} or null
+          Then response is 422 and detail reports a missing field with loc
+        Scenario: Value constraint violation
+          Given app with a model field constrained by gt=0
+          When client sends a value below the constraint
+          Then response is 422 with error type greater_than and loc
+    acceptance_criteria:
+      - id: R1.AC1
+        text_ru: "Валидное тело возвращает 200 и эхо-ответ"
+        text_en: "valid request body returns 200 and response body echoes the payload"
+        weight: 2
+        check: "status_code == 200 and response.json() contains the submitted item"
+        keywords: ["status_code == 200", "response.json()", "item"]
+        excludes: ["422", "missing"]
+      - id: R1.AC2
+        text_ru: "Отсутствие обязательного поля возвращает 422 с type=missing и loc"
+        text_en: "missing required field returns 422 validation error with type missing and loc"
+        weight: 3
+        check: "status_code == 422 and detail contains missing and loc"
+        keywords: ["422", "missing", "loc"]
+      - id: R1.AC3
+        text_ru: "Нарушение ограничения значения возвращает 422 с type=greater_than и loc"
+        text_en: "value constraint violation returns 422 with error type greater_than and loc"
+        weight: 3
+        check: "status_code == 422 and detail type is greater_than"
+        keywords: ["422", "greater_than", "loc"]
+      - id: R1.AC4
+        text_ru: "OpenAPI-схема помечает обязательное поле как required"
+        text_en: "OpenAPI schema marks the required body field as required"
+        weight: 1
+        check: "openapi components schemas required list contains field"
+        keywords: ["required", "schemas"]
+
+  - id: R2
+    title: "Dependency Injection: кэширование и teardown"
+    weight: 2
+    gherkin: |
+      Feature: Dependency injection caching
+        Scenario: Cached dependency
+          Given a dependency that increments a counter
+          When a route depends on it twice on the same request
+          Then the dependency is called once
+        Scenario: Cache disabled
+          Given a dependency used with use_cache=False
+          When the route is called once
+          Then the dependency is called twice
+        Scenario: Override
+          Given app.dependency_overrides for a dependency
+          When the route is called
+          Then the override result is used
+    acceptance_criteria:
+      - id: R2.AC1
+        text_ru: "При use_cache=True зависимость вызывается один раз на запрос"
+        text_en: "dependency with default cache is called once per request"
+        weight: 2
+        check: "counter and subcounter both equal 1 on a single request"
+        keywords: ["counter", "subcounter", "response.json()"]
+      - id: R2.AC2
+        text_ru: "При use_cache=False зависимость вызывается повторно"
+        text_en: "dependency with use_cache False is called again, counter differs from subcounter"
+        weight: 3
+        check: "counter == 2 and subcounter == 1"
+        keywords: ["sub-counter-no-cache", "counter", "subcounter"]
+      - id: R2.AC3
+        text_ru: "dependency_overrides подменяет зависимость"
+        text_en: "dependency_overrides replaces the dependency implementation"
+        weight: 2
+        check: "overridden dependency result is returned with 200"
+        keywords: ["dependency_overrides", "override", "status_code == 200"]
+      - id: R2.AC4
+        text_ru: "Зависимость с yield выполняет код после yield (teardown)"
+        text_en: "yield dependency runs teardown code after the response"
+        weight: 2
+        check: "teardown/after-yield code executed"
+        keywords: ["yield", "contextmanager"]
+
+  - id: R3
+    title: "HTTP Basic аутентификация"
+    weight: 3
+    gherkin: |
+      Feature: HTTP Basic authentication
+        Scenario: Valid credentials
+          Given an endpoint protected by HTTPBasic
+          When client sends valid Basic credentials
+          Then response is 200 and contains the username
+        Scenario: Invalid header
+          Given an endpoint protected by HTTPBasic
+          When client sends a malformed Authorization header
+          Then response is 401 with WWW-Authenticate Basic
+        Scenario: Optional auth
+          Given HTTPBasic(auto_error=False)
+          When client sends no credentials
+          Then response is 200 with a fallback message
+    acceptance_criteria:
+      - id: R3.AC1
+        text_ru: "Валидные Basic-креды возвращают 200 и username"
+        text_en: "valid Basic credentials return 200 and the username"
+        weight: 3
+        check: "status_code == 200 and response json username matches"
+        keywords: ["status_code == 200", "username", "john"]
+        excludes: ["401"]
+      - id: R3.AC2
+        text_ru: "auto_error=False без кредов возвращает 200 и fallback-сообщение"
+        text_en: "optional HTTP Basic without credentials returns 200 and a fallback message"
+        weight: 2
+        check: "status_code == 200 and fallback message present"
+        keywords: ["Create an account first", "status_code == 200"]
+        excludes: ["401"]
+      - id: R3.AC3
+        text_ru: "Невалидный или не-Basic заголовок возвращает 401 и WWW-Authenticate: Basic"
+        text_en: "invalid or non Basic Authorization header returns 401 with WWW-Authenticate Basic"
+        weight: 3
+        check: "status_code == 401 and WWW-Authenticate header equals Basic"
+        keywords: ["Basic", "WWW-Authenticate", "401", "Not authenticated"]
+        excludes: ["status_code == 200"]
+      - id: R3.AC4
+        text_ru: "Схема HTTPBasic присутствует в OpenAPI securitySchemes"
+        text_en: "OpenAPI securitySchemes contains the HTTPBasic scheme"
+        weight: 1
+        check: "securitySchemes HTTPBasic scheme equals basic"
+        keywords: ["securitySchemes", "HTTPBasic", "scheme"]
+
+  - id: R4
+    title: "Обработка ошибок и кастомные exception handlers"
+    weight: 2
+    gherkin: |
+      Feature: Exception handling
+        Scenario: HTTPException handler override
+          Given app registered a handler for HTTPException
+          When route raises HTTPException
+          Then the custom handler response is returned
+        Scenario: Validation error handler
+          Given app registered a handler for RequestValidationError
+          When request fails validation
+          Then the custom handler response is returned
+        Scenario: Unhandled server error
+          Given raise_server_exceptions is False
+          When route raises RuntimeError
+          Then response is 500 with the custom body
+    acceptance_criteria:
+      - id: R4.AC1
+        text_ru: "HTTPException перехватывается кастомным handler"
+        text_en: "custom HTTPException handler returns its own response"
+        weight: 2
+        check: "status_code == 200 and body exception == http-exception"
+        keywords: ["http-exception", "status_code == 200", "exception"]
+      - id: R4.AC2
+        text_ru: "RequestValidationError перехватывается кастомным handler"
+        text_en: "custom RequestValidationError handler returns its own response"
+        weight: 2
+        check: "status_code == 200 and body exception == request-validation"
+        keywords: ["request-validation", "status_code == 200"]
+      - id: R4.AC3
+        text_ru: "Необработанное исключение даёт 500 при raise_server_exceptions=False"
+        text_en: "unhandled exception returns 500 when raise_server_exceptions is False"
+        weight: 3
+        check: "status_code == 500 and body exception == server-error"
+        keywords: ["status_code == 500", "server-error"]
+      - id: R4.AC4
+        text_ru: "Traceback указывает на исходную строку raise в зависимости"
+        text_en: "traceback points to the original raise line in the dependency"
+        weight: 1
+        check: "traceback last frame lineno equals raise line"
+        keywords: ["traceback", "last_frame", "lineno"]
+
+  - id: R5
+    title: "Сериализация ответа по response_model"
+    weight: 2
+    gherkin: |
+      Feature: Response model filtering
+        Scenario: Top level filtering
+          Given route declared response_model=UserBase
+          When handler returns a richer object
+          Then extra fields are removed from the response
+        Scenario: Nested filtering
+          Given nested response model
+          When handler returns objects with extra nested fields
+          Then nested extra fields are removed
+        Scenario: Include and exclude
+          Given response_model_include or exclude
+          When handler returns the model
+          Then only the selected fields are present
+    acceptance_criteria:
+      - id: R5.AC1
+        text_ru: "Поля вне response_model отбрасываются на верхнем уровне"
+        text_en: "fields outside response_model are stripped at the top level"
+        weight: 3
+        check: "response json has no extra fields such as password"
+        keywords: ["response.json()", "email", "password"]
+      - id: R5.AC2
+        text_ru: "Поля вне response_model отбрасываются во вложенной модели"
+        text_en: "fields outside response_model are stripped in a nested model"
+        weight: 3
+        check: "nested owner object contains only email"
+        keywords: ["response.json()", "owner", "email"]
+      - id: R5.AC3
+        text_ru: "response_model_include и response_model_exclude фильтруют поля"
+        text_en: "response_model_include and response_model_exclude filter response fields"
+        weight: 2
+        check: "only included fields present, excluded absent"
+        keywords: ["include", "exclude", "response.json()"]
+      - id: R5.AC4
+        text_ru: "Невалидный response_model приводит к ошибке"
+        text_en: "invalid response_model raises an error"
+        weight: 1
+        check: "pytest.raises or 500 on invalid response model"
+        keywords: ["raises", "response_model"]
+
+
+

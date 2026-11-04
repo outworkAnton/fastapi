@@ -1,0 +1,1 @@
+"""Semantic coverage demo package."""

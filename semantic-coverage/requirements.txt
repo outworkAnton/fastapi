@@ -1,0 +1,12 @@
+openai>=1.40
+numpy>=1.26
+rank-bm25>=0.2.2
+snowballstemmer>=2.2
+pydantic>=2.7
+PyYAML>=6.0
+python-dotenv>=1.0
+pytest>=8.0
+
+# Optional: real multilingual embeddings. If absent, the hashing backend is used
+# and recorded in run_meta.json as embedding_backend=hashing.
+# sentence-transformers>=3.0
