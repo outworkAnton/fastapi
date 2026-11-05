@@ -1,0 +1,67 @@
+{
+  "requirement_id": "R1",
+  "acs": [
+    {
+      "ac_id": "R1.AC1",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Test test_put_correct_body sends a valid request body and asserts status_code 200 and response.json() equals snapshot containing the submitted item, directly covering the AC.",
+      "evidence": [
+        {
+          "test_id": "tests/test_multi_body_errors.py::test_put_correct_body",
+          "file": "tests/test_multi_body_errors.py",
+          "line_start": 25,
+          "line_end": 37,
+          "quote": "    assert response.status_code == 200, response.text\n    assert response.json() == snapshot(\n        {\n            \"item\": [\n                {\n                    \"name\": \"Foo\",\n                    \"age\": \"5\",\n                }\n            ]\n        }\n    )"
+        }
+      ]
+    },
+    {
+      "ac_id": "R1.AC2",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Test test_embedded_body_requires_an_object asserts status_code 422 and detail errors with type missing and loc in body, matching the AC.",
+      "evidence": [
+        {
+          "test_id": "tests/test_body_alias_choices.py::test_embedded_body_requires_an_object",
+          "file": "tests/test_body_alias_choices.py",
+          "line_start": 134,
+          "line_end": 142,
+          "quote": "    assert response.status_code == 422\n    assert [(error[\"type\"], error[\"loc\"]) for error in response.json()[\"detail\"]] == [\n        (\"missing\", [\"body\", \"items\"]),\n        (\"missing\", [\"body\", \"first\"]),\n    ]"
+        }
+      ]
+    },
+    {
+      "ac_id": "R1.AC3",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Test test_jsonable_encoder_requiring_error asserts status_code 422 and detail contains type greater_than with loc in body, matching the AC.",
+      "evidence": [
+        {
+          "test_id": "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+          "file": "tests/test_multi_body_errors.py",
+          "line_start": 40,
+          "line_end": 53,
+          "quote": "    assert response.status_code == 422, response.text\n    assert response.json() == {\n        \"detail\": [\n            {\n                \"type\": \"greater_than\",\n                \"loc\": [\"body\", 0, \"age\"],\n                \"msg\": \"Input should be greater than 0\",\n                \"input\": -1.0,\n                \"ctx\": {\"gt\": 0},\n            }\n        ]\n    }"
+        }
+      ]
+    },
+    {
+      "ac_id": "R1.AC4",
+      "status": "covered",
+      "confidence": 0.95,
+      "reasoning": "Test test_required_str_schema asserts that the OpenAPI schema for the body model includes required list containing field p, matching the AC.",
+      "evidence": [
+        {
+          "test_id": "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+          "file": "tests/test_request_params/test_body/test_required_str.py",
+          "line_start": 35,
+          "line_end": 46,
+          "quote": "    assert app.openapi()[\"components\"][\"schemas\"][body_model_name] == {\n        \"properties\": {\n            \"p\": {\"title\": \"P\", \"type\": \"string\"},\n        },\n        \"required\": [\"p\"],\n        \"title\": body_model_name,\n        \"type\": \"object\",\n    }"
+        }
+      ]
+    }
+  ],
+  "gaps": [],
+  "notes": "All acceptance criteria are covered by the provided candidate tests. Path parameter tests with greater_than were not considered for R1.AC3 because the requirement is about request body validation."
+}

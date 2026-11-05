@@ -2,7 +2,7 @@
 
 Инструмент сопоставляет бизнес-требования с автотестами и выдаёт оценку покрытия, которую можно проверить: у каждого вывода есть `файл:строка` и дословная цитата, прошедшая машинную проверку.
 
-Демонстрация выполнена на `fastapi/fastapi` @ `5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0`.
+Демонстрация выполнена на `fastapi/fastapi` @ `5e376c4` (форк-ветка `semantic-coverage-demo`; тесты идентичны upstream `5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0`).
 
 ---
 
@@ -11,8 +11,8 @@
 | | |
 |---|---|
 | Пайплайн | работает, `verify` — 10/10 PASS |
-| Режим валидации | LLM `glm-5.3` через OpenAI-совместимый API (5 вызовов, temperature=0, seed=42) |
-| Прогон | `artifacts/run_20261104T133102Z` |
+| Режим валидации | LLM `deepseek-v4-pro` через OpenAI-совместимый API (5 вызовов, temperature=0, seed=42) |
+| Прогон | `artifacts/run_20261105T142506Z` |
 | Тесты | `pytest demo/tests` — 11 passed |
 | Публикация форка | **выполнена**: [`outworkAnton/fastapi`, ветка `semantic-coverage-demo`](https://github.com/outworkAnton/fastapi/tree/semantic-coverage-demo) |
 
@@ -84,9 +84,9 @@ pytest demo/tests -q
 
 ```dotenv
 # .env
-LLM_BASE_URL=https://api.z.ai/api/coding/paas/v4
+LLM_BASE_URL=https://api.deepseek.com
 LLM_API_KEY=<key>
-LLM_MODEL=glm-5.3
+LLM_MODEL=deepseek-v4-pro
 ```
 
 ```powershell
@@ -103,13 +103,13 @@ python -m demo.cli report
 |---|---|
 | Файлов / тестов | 50 / 649 |
 | Тестов без assert | 0 |
-| Покрытие (невзвешенное / взвешенное) | 97.8% / 97.8% |
-| R1 / R2 / R3 / R4 / R5 | 100 / 89 / 100 / 100 / 100 |
-| Цитат / уникальных тестов | 42 / 39 (все верифицированы evidence gate, 0 отклонений) |
+| Покрытие (невзвешенное / взвешенное) | 97.6% / 97.8% |
+| R1 / R2 / R3 / R4 / R5 | 100 / 100 / 100 / 88 / 100 |
+| Цитат / уникальных тестов | 22 / 20 (1 цитата отклонена evidence gate → R4.AC4 absent) |
 | Precision@5 | 0.92 |
 | Recall@pool | 0.96 |
 | Стабильность (Jaccard × 3) | 1.00 |
-| LLM-фаза | 138 с: 5 вызовов `glm-5.3`, все ответы распарсены с первой попытки |
+| LLM-фаза | ~265 с: 5 вызовов `deepseek-v4-pro`, 0 retry |
 
 ---
 
@@ -129,12 +129,12 @@ python -m demo.cli report
 
 | Пункт задания | Статус |
 |---|---|
-| Карта `requirement → tests`, покрытие 0–100%, доказательства | ✅ `coverage_report.md`: карта по 5 требованиям, 97.8%, 42 цитаты `file:строки` |
+| Карта `requirement → tests`, покрытие 0–100%, доказательства | ✅ `coverage_report.md`: карта по 5 требованиям, 97.8%, 22 цитаты `file:строки` |
 | 4 обязательных deliverable (brief / report / risk / summary) | ✅ все, по требуемой структуре |
 | Демо на своём GitHub-проекте: 5 требований, до ~50 файлов | ✅ форк FastAPI, 5 требований (20 AC), ровно 50 файлов |
 | Прототип «со звёздочкой»: индексация → сопоставление → отчёт | ✅ CLI `demo/`, 11 unit-тестов |
 | AI-инструменты разрешены и ожидаемы | ✅ эмбеддинги в рантайме; LLM-валидация финального прогона; лог — `AI_USAGE_LOG.md` |
-| Устойчивость: детерминизм / формулировки / модели | ✅ измерено: Jaccard 1.0; RU/EN-контракт; каскад моделей, agreement 20/20 |
+| Устойчивость: детерминизм / формулировки / модели | ✅ измерено: Jaccard 1.0; RU/EN-контракт; каскад моделей offline → Nemotron → glm-5.3 → deepseek-v4-pro, agreement 18/20 |
 
 **Расхождений с заданием нет.** `TZ_AGENT.md` — исполнительная спецификация, сгенерированная из задания перед началом работ; она добавила самоограничения жёстче задания (состав gold set, Recall@10, CoverageMAE). Относительно задания эти пункты не требовались; их честный статус относительно самой спецификации — 🔁/⚠️ в матрице.
 
@@ -144,7 +144,7 @@ python -m demo.cli report
 
 Демонстрация опубликована: **[`outworkAnton/fastapi`, ветка `semantic-coverage-demo`](https://github.com/outworkAnton/fastapi/tree/semantic-coverage-demo)**, папка `semantic-coverage/`.
 
-Содержимое папки: `task.md` (задание), `TZ_AGENT.md` (исполнительная спека), четыре deliverable, `tz_compliance.md` (сверка с заданием), `AI_USAGE_LOG.md`, `requirements.txt`, `.env.example`, `demo/` (пайплайн и тесты), `artifacts/run_*/` — все прогоны, включая LLM-эксперименты (бесплатная Nemotron с нестабильными статусами — 8 её неточных цитат отклонены evidence gate; контрольные прогоны `glm-5.3`) и первый offline-прогон с некорректными доказательствами: история итераций сохранена, а не вычищена.
+Содержимое папки: `task.md` (задание), `TZ_AGENT.md` (исполнительная спека), четыре deliverable, `tz_compliance.md` (сверка с заданием), `AI_USAGE_LOG.md`, `requirements.txt`, `.env.example`, `demo/` (пайплайн и тесты), `artifacts/run_*/` — все прогоны, включая LLM-эксперименты (бесплатная Nemotron с нестабильными статусами — 8 её неточных цитат отклонены evidence gate; `glm-5.3`; финальный `deepseek-v4-pro`) и первый offline-прогон с некорректными доказательствами: история итераций сохранена, а не вычищена.
 
 Быстрая проверка после клонирования форка: скопировать `semantic-coverage/demo` и `semantic-coverage/requirements.txt`, выполнить команды из раздела «Быстрый старт», затем `python -m demo.cli verify` — ожидается 10/10 PASS.
 
@@ -153,7 +153,7 @@ python -m demo.cli report
 ## Ограничения
 
 - Не запускает тесты: оценивает наличие и содержание проверок, а не их прохождение.
-- Offline-валидатор лексический: известный false negative — R2.AC4 (`tests/test_dependency_contextmanager.py`).
+- Offline-валидатор лексический: известный false negative — R2.AC4 (`tests/test_dependency_contextmanager.py`); LLM-валидатор `deepseek-v4-pro` оценивает этот AC как `covered` (см. `demo_summary.md`).
 - Полнота ограничена декомпозицией требований: неописанное поведение не будет найдено.
 - Один репозиторий, один фреймворк.
 

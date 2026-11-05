@@ -1,0 +1,74 @@
+{
+  "requirement_id": "R5",
+  "acs": [
+    {
+      "ac_id": "R5.AC1",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test asserts top-level response JSON exactly equals {\"email\": \"johndoe@example.com\"}, proving fields like password are stripped.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+          "file": "tests/test_response_model_data_filter_no_inheritance.py",
+          "line_start": 61,
+          "line_end": 65,
+          "quote": "    assert response.json() == {\"email\": \"johndoe@example.com\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R5.AC2",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test asserts nested owner object contains only email, demonstrating stripping of extra nested fields.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+          "file": "tests/test_response_model_data_filter_no_inheritance.py",
+          "line_start": 68,
+          "line_end": 73,
+          "quote": "    assert response.json() == {\n        \"name\": \"Nibbler\",\n        \"owner\": {\"email\": \"johndoe@example.com\"},\n    }"
+        }
+      ]
+    },
+    {
+      "ac_id": "R5.AC3",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Include and exclude tests assert filtered response JSON with only included fields present and excluded fields absent, directly covering response_model_include/exclude.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_include_exclude.py::test_nested_include_simple",
+          "file": "tests/test_response_model_include_exclude.py",
+          "line_start": 116,
+          "line_end": 124,
+          "quote": "    assert response.status_code == 200, response.text\n    assert response.json() == {\n        \"baz\": \"simple_include model2 baz\",\n        \"ref\": {\"foo\": \"simple_include model foo\"},\n    }"
+        },
+        {
+          "test_id": "tests/test_response_model_include_exclude.py::test_nested_exclude_simple",
+          "file": "tests/test_response_model_include_exclude.py",
+          "line_start": 138,
+          "line_end": 144,
+          "quote": "    assert response.status_code == 200, response.text\n    assert response.json() == {\n        \"baz\": \"simple_exclude model2 baz\",\n        \"ref\": {\"foo\": \"simple_exclude model foo\"},\n    }"
+        }
+      ]
+    },
+    {
+      "ac_id": "R5.AC4",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test explicitly uses pytest.raises(FastAPIError) with response_model=NonPydanticModel, showing invalid response_model raises an error.",
+      "evidence": [
+        {
+          "test_id": "tests/test_response_model_invalid.py::test_invalid_response_model_raises",
+          "file": "tests/test_response_model_invalid.py",
+          "line_start": 10,
+          "line_end": 16,
+          "quote": "    with pytest.raises(FastAPIError):\n        app = FastAPI()\n\n        @app.get(\"/\", response_model=NonPydanticModel)\n        def read_root():\n            pass"
+        }
+      ]
+    }
+  ],
+  "gaps": [],
+  "notes": "All acceptance criteria are covered by the candidate tests."
+}

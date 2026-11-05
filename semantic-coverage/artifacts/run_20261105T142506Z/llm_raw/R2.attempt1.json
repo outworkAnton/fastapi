@@ -1,0 +1,81 @@
+{
+  "requirement_id": "R2",
+  "acs": [
+    {
+      "ac_id": "R2.AC1",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test test_sub_counter asserts response.json() == {\"counter\": 1, \"subcounter\": 1} on a single request, matching the required counter and subcounter both equal 1.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_cache.py::test_sub_counter",
+          "file": "tests/test_dependency_cache.py",
+          "line_start": 64,
+          "line_end": 71,
+          "quote": "assert response.json() == {\"counter\": 1, \"subcounter\": 1}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R2.AC2",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test test_sub_counter_no_cache asserts response.json() == {\"counter\": 2, \"subcounter\": 1}, showing counter differs from subcounter due to use_cache False.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+          "file": "tests/test_dependency_cache.py",
+          "line_start": 74,
+          "line_end": 81,
+          "quote": "assert response.json() == {\"counter\": 2, \"subcounter\": 1}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R2.AC3",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test test_override_with_sub_decorator_depends_k_bar returns status code 200 and overridden dependency result {\"in\": \"decorator-depends\"}, proving dependency_overrides replaces the implementation.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+          "file": "tests/test_dependency_overrides.py",
+          "line_start": 296,
+          "line_end": 301,
+          "quote": "assert response.status_code == 200"
+        },
+        {
+          "test_id": "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+          "file": "tests/test_dependency_overrides.py",
+          "line_start": 296,
+          "line_end": 301,
+          "quote": "assert response.json() == {\"in\": \"decorator-depends\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R2.AC4",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test test_app_level_dep_scope_function asserts status 503 and detail \"Exception after yield\", indicating that the code after the yield (teardown) was executed and raised an exception.",
+      "evidence": [
+        {
+          "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+          "file": "tests/test_dependency_yield_scope.py",
+          "line_start": 222,
+          "line_end": 232,
+          "quote": "assert response.status_code == 503"
+        },
+        {
+          "test_id": "tests/test_dependency_yield_scope.py::test_app_level_dep_scope_function",
+          "file": "tests/test_dependency_yield_scope.py",
+          "line_start": 222,
+          "line_end": 232,
+          "quote": "assert response.json() == {\"detail\": \"Exception after yield\"}"
+        }
+      ]
+    }
+  ],
+  "gaps": [],
+  "notes": "All ACs are covered by the provided candidate tests."
+}

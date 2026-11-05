@@ -1,0 +1,67 @@
+{
+  "requirement_id": "R3",
+  "acs": [
+    {
+      "ac_id": "R3.AC1",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test asserts status_code == 200 and response JSON username equals john.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 23,
+          "line_end": 26,
+          "quote": "    assert response.status_code == 200, response.text\n    assert response.json() == {\"username\": \"john\", \"password\": \"secret\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R3.AC2",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test without credentials asserts status_code == 200 and fallback message 'Create an account first'.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 29,
+          "line_end": 32,
+          "quote": "    assert response.status_code == 200, response.text\n    assert response.json() == {\"msg\": \"Create an account first\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R3.AC3",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "Test with invalid credentials asserts status_code == 401, WWW-Authenticate header equals Basic, and detail Not authenticated.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_security_http_basic_invalid_credentials",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 35,
+          "line_end": 41,
+          "quote": "    assert response.status_code == 401, response.text\n    assert response.headers[\"WWW-Authenticate\"] == \"Basic\"\n    assert response.json() == {\"detail\": \"Not authenticated\"}"
+        }
+      ]
+    },
+    {
+      "ac_id": "R3.AC4",
+      "status": "covered",
+      "confidence": 1.0,
+      "reasoning": "OpenAPI schema test asserts components.securitySchemes.HTTPBasic has type http and scheme basic.",
+      "evidence": [
+        {
+          "test_id": "tests/test_security_http_basic_optional.py::test_openapi_schema",
+          "file": "tests/test_security_http_basic_optional.py",
+          "line_start": 53,
+          "line_end": 79,
+          "quote": "            \"components\": {\n                \"securitySchemes\": {\"HTTPBasic\": {\"type\": \"http\", \"scheme\": \"basic\"}}\n            }"
+        }
+      ]
+    }
+  ],
+  "gaps": [],
+  "notes": "All R3 acceptance criteria are covered by the candidate tests."
+}

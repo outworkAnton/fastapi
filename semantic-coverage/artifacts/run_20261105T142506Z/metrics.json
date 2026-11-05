@@ -1,0 +1,51 @@
+{
+  "run_id": "run_20261105T142506Z",
+  "gold_pairs": 35,
+  "positive_pairs": 33,
+  "precision_at_5": 0.92,
+  "recall_at_pool": 0.96,
+  "pool_cap": 25,
+  "stability_jaccard_3_runs": 1.0,
+  "top5": {
+    "R1": [
+      "tests/test_union_form_normalization.py::test_empty_scalar_is_missing",
+      "tests/test_multi_body_errors.py::test_jsonable_encoder_requiring_error",
+      "tests/test_request_params/test_body/test_list.py::test_required_list_str_schema",
+      "tests/test_request_params/test_body/test_required_str.py::test_required_str_schema",
+      "tests/test_path.py::test_path_param_gt0_0"
+    ],
+    "R2": [
+      "tests/test_dependency_cache.py::test_sub_counter_no_cache",
+      "tests/test_dependency_cache.py::test_sub_counter",
+      "tests/test_dependency_cache.py::test_security_cache",
+      "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends_k_bar",
+      "tests/test_dependency_overrides.py::test_override_with_sub_decorator_depends"
+    ],
+    "R3": [
+      "tests/test_security_http_basic_optional.py::test_security_http_basic_non_basic_credentials",
+      "tests/test_security_http_basic_realm.py::test_security_http_basic_non_basic_credentials",
+      "tests/test_security_http_basic_realm_description.py::test_security_http_basic_non_basic_credentials",
+      "tests/test_security_http_basic_realm_description.py::test_security_http_basic_invalid_credentials",
+      "tests/test_security_http_basic_optional.py::test_security_http_basic_no_credentials"
+    ],
+    "R4": [
+      "tests/test_exception_handlers.py::test_override_request_validation_exception",
+      "tests/test_exception_handlers.py::test_override_server_error_exception_response",
+      "tests/test_exception_handlers.py::test_override_http_exception",
+      "tests/test_custom_middleware_exception.py::test_custom_middleware_exception_not_raised",
+      "tests/test_telemetry/test_http.py::test_custom_error_handler_sees_span"
+    ],
+    "R5": [
+      "tests/test_response_model_data_filter_no_inheritance.py::test_filter_top_level_model",
+      "tests/test_response_model_data_filter.py::test_filter_top_level_model",
+      "tests/test_response_model_data_filter.py::test_filter_second_level_model",
+      "tests/test_response_model_data_filter_no_inheritance.py::test_filter_second_level_model",
+      "tests/test_response_model_data_filter.py::test_list_of_models"
+    ]
+  },
+  "targets": {
+    "precision_at_5": 0.8,
+    "recall_at_pool": 0.8,
+    "stability": 0.9
+  }
+}

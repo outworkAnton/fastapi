@@ -101,7 +101,7 @@ def render_markdown(payload: dict, reqs: RequirementsFile, meta: dict) -> str:
     lines.append(f"**Embedding backend**: `{meta.get('embedding_backend', 'n/a')}`  ")
     lines.append(f"**Files in scope**: {meta.get('files', 'n/a')} / tests: {meta.get('tests', 'n/a')}  ")
     lines.append(f"**Overall coverage (unweighted)**: {payload['scores']['overall_unweighted']}%  ")
-    lines.append(f"**Overall coverage (weighted by requirement weight)**: {payload['scores']['overall_weighted']}%")
+    lines.append(f"**Overall coverage (weighted by AC weight)**: {payload['scores']['overall_weighted']}%")
     lines.append("")
     lines.append("## Summary table")
     lines.append("")
